@@ -1,44 +1,20 @@
-# ArcLume V4
+# ArcLume V5
 
-ArcLume V4 is a premium GitHub Pages-ready Arc dashboard that combines:
+Premium Arc wallet and Arc House companion for GitHub Pages.
 
-- live Arc Testnet wallet intelligence
-- email-based Arc House profile mode
-- public Arc House events and content
-- Architect program guidance
-- adaptive light and dark theme
-- premium palette switching between Emerald and Arc
+## What is new in V5
 
-## Features
-
-### Wallet intelligence
-- Live Arc Testnet balance lookup
-- Transaction count via wallet nonce
-- Wallet type detection, EOA or contract
-- Arcscan wallet and transaction linking
-- Arc score based on live usage signals
-
-### Profile mode
-- Wallet address input for Arc data
-- Email input for Arc House profile mode
-- Local save for returning visits
-- Readiness score for wallet plus email completion
-- Honest login-required state for private Arc House fields
-
-### Arc House layer
-- Upcoming Arc House events
-- Featured public Arc content
-- Architect tiers, benefits, roles, and contribution resource links
-- Current community and hackathon spotlight panels
-
-## Network
-- Network: Arc Testnet
-- RPC: https://rpc.testnet.arc.network
-- Chain ID: 5042002
-- Explorer: https://testnet.arcscan.app
-- Gas Token: USDC
+- Stronger green-black premium visual system
+- Automatic system light and dark theme
+- Wallet address + email dual-input profile flow
+- Cleaner Arc House sign-in modal-style handoff panel
+- Wallet-to-community journey tracker
+- Richer event priority cards based on the public Arc House event slate
+- Public Arc House content, Architect resources, and contribution links
+- Split project structure ready for GitHub Pages
 
 ## Project structure
+
 - `index.html`
 - `css/styles.css`
 - `js/app.js`
@@ -46,5 +22,14 @@ ArcLume V4 is a premium GitHub Pages-ready Arc dashboard that combines:
 - `assets/arclume-logo-mark.svg`
 - `assets/favicon.svg`
 
+## Arc network
+
+- Network: Arc Testnet
+- RPC: https://rpc.testnet.arc.network
+- Chain ID: 5042002
+- Explorer: https://testnet.arcscan.app
+- Gas token: USDC
+
 ## Notes
-ArcLume does not fake private Arc House data. Personal points, badges, exact participation history, and linked account proof remain shown as login-required until Arc exposes an official authenticated integration.
+
+ArcLume can show real Arc onchain data and public Arc House community data. Private Arc House profile details such as linked email, personal points, badges, and event history remain login-gated unless Arc provides an authenticated public integration.
