@@ -3,768 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ArcLume, Premium Arc Wallet Intelligence</title>
-  <meta name="description" content="ArcLume is a premium Arc Testnet wallet intelligence dashboard with live wallet metrics, network status, and explorer-powered activity insights." />
+  <title>ArcLume, Premium Arc Wallet & Community Intelligence</title>
+  <meta name="description" content="ArcLume is a premium Arc wallet and community intelligence dashboard with adaptive light and dark mode, live Arc wallet checks, Arc House public updates, events, content, and Architect program guidance." />
+  <meta name="theme-color" content="#0f6fff" />
+  <meta property="og:title" content="ArcLume" />
+  <meta property="og:description" content="Premium Arc wallet and public community intelligence." />
+  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #f4f7fb;
-      --bg-2: #edf3fb;
-      --surface: rgba(255, 255, 255, 0.84);
-      --surface-2: rgba(255, 255, 255, 0.64);
-      --surface-3: rgba(13, 24, 43, 0.06);
-      --line: rgba(12, 24, 48, 0.08);
-      --text: #0f172a;
-      --muted: #5f6f89;
-      --soft: #24324a;
-      --primary: #0f6fff;
-      --secondary: #18c8c1;
-      --accent: #7c3aed;
-      --success: #11b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-      --shadow: 0 30px 80px rgba(16, 24, 40, 0.12);
-      --glow-1: 0 0 80px rgba(15, 111, 255, 0.16);
-      --glow-2: 0 0 80px rgba(24, 200, 193, 0.14);
-      --radius-xl: 32px;
-      --radius-lg: 22px;
-      --radius-md: 18px;
-      --radius-sm: 14px;
-      --max: 1380px;
-      --hero-text: linear-gradient(135deg, #07111f 0%, #0f6fff 46%, #18c8c1 75%, #7c3aed 100%);
-      --hero-backdrop:
-        radial-gradient(circle at 12% 16%, rgba(15, 111, 255, 0.12), transparent 30%),
-        radial-gradient(circle at 86% 14%, rgba(24, 200, 193, 0.11), transparent 26%),
-        radial-gradient(circle at 80% 84%, rgba(124, 58, 237, 0.08), transparent 22%),
-        linear-gradient(180deg, #f7fbff 0%, #eef5ff 48%, #edf2fa 100%);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #040814;
-        --bg-2: #081121;
-        --surface: rgba(10, 17, 33, 0.78);
-        --surface-2: rgba(255, 255, 255, 0.05);
-        --surface-3: rgba(255, 255, 255, 0.08);
-        --line: rgba(255, 255, 255, 0.09);
-        --text: #eef4ff;
-        --muted: #98a8c4;
-        --soft: #dfe7fb;
-        --primary: #1c7dff;
-        --secondary: #25d4d0;
-        --accent: #8b5cf6;
-        --success: #22c55e;
-        --warning: #fbbf24;
-        --danger: #fb7185;
-        --shadow: 0 30px 80px rgba(0, 0, 0, 0.34);
-        --glow-1: 0 0 80px rgba(28, 125, 255, 0.26);
-        --glow-2: 0 0 80px rgba(37, 212, 208, 0.16);
-        --hero-text: linear-gradient(135deg, #ffffff 0%, #b7d3ff 42%, #64f0ea 76%, #c3a6ff 100%);
-        --hero-backdrop:
-          radial-gradient(circle at 12% 16%, rgba(28, 125, 255, 0.18), transparent 30%),
-          radial-gradient(circle at 86% 14%, rgba(37, 212, 208, 0.14), transparent 26%),
-          radial-gradient(circle at 80% 84%, rgba(139, 92, 246, 0.12), transparent 22%),
-          linear-gradient(180deg, #050815 0%, #07111f 48%, #03060f 100%);
-      }
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
-      background: var(--hero-backdrop);
-      min-height: 100vh;
-      overflow-x: hidden;
-      transition: background 220ms ease, color 220ms ease;
-    }
-
-    body::before,
-    body::after {
-      content: "";
-      position: fixed;
-      inset: auto;
-      pointer-events: none;
-      z-index: 0;
-      filter: blur(60px);
-      opacity: 0.82;
-    }
-
-    body::before {
-      width: 420px;
-      height: 420px;
-      top: -120px;
-      left: -120px;
-      background: rgba(15, 111, 255, 0.16);
-      animation: floatOne 12s ease-in-out infinite;
-    }
-
-    body::after {
-      width: 360px;
-      height: 360px;
-      right: -80px;
-      bottom: -80px;
-      background: rgba(24, 200, 193, 0.12);
-      animation: floatTwo 14s ease-in-out infinite;
-    }
-
-    @keyframes floatOne {
-      0%, 100% { transform: translate3d(0,0,0) scale(1); }
-      50% { transform: translate3d(60px, 35px, 0) scale(1.1); }
-    }
-
-    @keyframes floatTwo {
-      0%, 100% { transform: translate3d(0,0,0) scale(1); }
-      50% { transform: translate3d(-50px, -30px, 0) scale(1.06); }
-    }
-
-    .grid-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(127, 149, 183, 0.09) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(127, 149, 183, 0.09) 1px, transparent 1px);
-      background-size: 72px 72px;
-      mask-image: radial-gradient(circle at center, rgba(0,0,0,0.82), transparent 88%);
-    }
-
-    .shell {
-      position: relative;
-      z-index: 1;
-      width: min(calc(100% - 32px), var(--max));
-      margin: 22px auto 42px;
-    }
-
-    .glass {
-      background: linear-gradient(180deg, var(--surface), var(--surface-2));
-      border: 1px solid var(--line);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      box-shadow: var(--shadow);
-    }
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 16px 18px;
-      border-radius: 999px;
-      margin-bottom: 18px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .brand-mark {
-      width: 52px;
-      height: 52px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary) 58%, var(--accent));
-      display: grid;
-      place-items: center;
-      box-shadow: var(--glow-1), var(--glow-2);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .brand-mark::after {
-      content: "";
-      position: absolute;
-      inset: 1px;
-      border-radius: 17px;
-      background: linear-gradient(145deg, rgba(255,255,255,0.3), rgba(255,255,255,0.04));
-    }
-
-    .brand-mark svg {
-      position: relative;
-      z-index: 1;
-      width: 30px;
-      height: 30px;
-      filter: drop-shadow(0 6px 16px rgba(0,0,0,0.16));
-    }
-
-    .brand-copy h1 {
-      margin: 0;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 18px;
-      letter-spacing: 0.01em;
-    }
-
-    .brand-copy p {
-      margin: 3px 0 0;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border-radius: 999px;
-      padding: 10px 14px;
-      background: var(--surface-2);
-      border: 1px solid var(--line);
-      color: var(--soft);
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--success);
-      box-shadow: 0 0 18px rgba(17,185,129,0.75);
-    }
-
-    .hero {
-      border-radius: var(--radius-xl);
-      padding: 28px;
-      overflow: hidden;
-      position: relative;
-      margin-bottom: 18px;
-      background:
-        linear-gradient(140deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06)),
-        linear-gradient(135deg, rgba(15,111,255,0.12), rgba(24,200,193,0.08) 58%, rgba(124,58,237,0.08));
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 15% 30%, rgba(15,111,255,0.14), transparent 26%),
-        radial-gradient(circle at 86% 18%, rgba(24,200,193,0.14), transparent 24%),
-        radial-gradient(circle at 78% 85%, rgba(124,58,237,0.12), transparent 22%);
-      pointer-events: none;
-    }
-
-    .hero-grid {
-      position: relative;
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-      gap: 22px;
-      align-items: stretch;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: var(--surface-2);
-      border: 1px solid var(--line);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--soft);
-      margin-bottom: 16px;
-    }
-
-    .hero h2 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(2.4rem, 5vw, 4.8rem);
-      line-height: 0.98;
-      letter-spacing: -0.05em;
-      margin: 0 0 14px;
-      max-width: 10.5ch;
-    }
-
-    .gradient-text {
-      background: var(--hero-text);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero p {
-      margin: 0;
-      max-width: 58ch;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.72;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 22px;
-    }
-
-    .btn {
-      appearance: none;
-      border: 0;
-      border-radius: 16px;
-      padding: 14px 18px;
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      color: white;
-    }
-
-    .btn:hover { transform: translateY(-2px); }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--secondary) 58%, var(--accent));
-      box-shadow: 0 18px 40px rgba(15, 111, 255, 0.22);
-    }
-
-    .btn-secondary {
-      background: var(--surface-2);
-      border: 1px solid var(--line);
-      color: var(--text);
-    }
-
-    .hero-side {
-      display: grid;
-      gap: 16px;
-      align-content: start;
-    }
-
-    .mini-panel {
-      border-radius: 24px;
-      padding: 20px;
-      background: linear-gradient(180deg, var(--surface), rgba(255,255,255,0.04));
-      border: 1px solid var(--line);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .mini-panel::after {
-      content: "";
-      position: absolute;
-      inset: auto auto -24px -24px;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(24,200,193,0.18), transparent 65%);
-      pointer-events: none;
-    }
-
-    .label {
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-size: 11px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .value-lg {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.9rem;
-      letter-spacing: -0.04em;
-      margin: 0;
-    }
-
-    .meta-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      margin-top: 14px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.6fr) minmax(320px, 0.9fr);
-      gap: 18px;
-      align-items: start;
-    }
-
-    .stack { display: grid; gap: 18px; }
-
-    .card {
-      border-radius: 28px;
-      padding: 22px;
-    }
-
-    .card-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 18px;
-    }
-
-    .card-header h3 {
-      margin: 0;
-      font-size: 18px;
-      font-family: "Space Grotesk", sans-serif;
-      letter-spacing: -0.03em;
-    }
-
-    .card-header p {
-      margin: 8px 0 0;
-      font-size: 13px;
-      color: var(--muted);
-      max-width: 58ch;
-      line-height: 1.65;
-    }
-
-    .wallet-form {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 12px;
-      margin-top: 8px;
-    }
-
-    .field-wrap { position: relative; }
-
-    .field-wrap input {
-      width: 100%;
-      padding: 18px 18px 18px 52px;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.04);
-      color: var(--text);
-      font-size: 14px;
-      font-weight: 600;
-      outline: none;
-      transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
-    }
-
-    .field-wrap input:focus {
-      border-color: rgba(24,200,193,0.44);
-      box-shadow: 0 0 0 5px rgba(24,200,193,0.08);
-      transform: translateY(-1px);
-    }
-
-    .field-wrap span {
-      position: absolute;
-      left: 18px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--muted);
-      font-size: 18px;
-      pointer-events: none;
-    }
-
-    .sub-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .ghost-btn {
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.04);
-      border-radius: 14px;
-      color: var(--soft);
-      padding: 10px 14px;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .metrics {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .metric {
-      padding: 18px;
-      border-radius: 22px;
-      background: linear-gradient(180deg, var(--surface), rgba(255,255,255,0.03));
-      border: 1px solid var(--line);
-      min-height: 132px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .metric::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, rgba(15,111,255,0), rgba(15,111,255,1), rgba(24,200,193,1), rgba(124,58,237,1), rgba(15,111,255,0));
-      opacity: 0.95;
-    }
-
-    .metric .metric-label {
-      color: var(--muted);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.09em;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .metric strong {
-      display: block;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(1.6rem, 2vw, 2.3rem);
-      letter-spacing: -0.05em;
-      margin-bottom: 10px;
-    }
-
-    .metric small {
-      display: block;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    .insight-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .insight {
-      border-radius: 22px;
-      padding: 18px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.035);
-      min-height: 150px;
-    }
-
-    .insight h4 {
-      margin: 0 0 10px;
-      font-size: 15px;
-    }
-
-    .insight p,
-    .insight li {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    .insight ul {
-      margin: 0;
-      padding-left: 18px;
-    }
-
-    .status-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .status-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 13px 14px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.045);
-      border: 1px solid var(--line);
-      font-size: 13px;
-    }
-
-    .status-row span:last-child {
-      font-weight: 700;
-      color: var(--soft);
-      text-align: right;
-      word-break: break-word;
-    }
-
-    .activity-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .activity-item {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 14px;
-      align-items: center;
-      padding: 16px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--line);
-      transition: transform 180ms ease, border-color 180ms ease;
-    }
-
-    .activity-item:hover {
-      transform: translateY(-2px);
-      border-color: rgba(15,111,255,0.32);
-    }
-
-    .activity-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, rgba(15,111,255,0.16), rgba(24,200,193,0.16) 58%, rgba(124,58,237,0.18));
-      font-size: 18px;
-    }
-
-    .activity-main h4 {
-      margin: 0 0 6px;
-      font-size: 14px;
-    }
-
-    .activity-main p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    .activity-meta {
-      text-align: right;
-      display: grid;
-      gap: 6px;
-      justify-items: end;
-    }
-
-    .tag {
-      padding: 7px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .tag-primary { background: rgba(15,111,255,0.14); color: #77a8ff; }
-    .tag-success { background: rgba(17,185,129,0.12); color: #0fb37d; }
-    .tag-warning { background: rgba(245,158,11,0.14); color: #d18600; }
-    .tag-accent { background: rgba(124,58,237,0.14); color: #8f60ff; }
-
-    @media (prefers-color-scheme: dark) {
-      .tag-primary { background: rgba(15,111,255,0.18); color: #c7dbff; }
-      .tag-success { background: rgba(17,185,129,0.16); color: #aff4dc; }
-      .tag-warning { background: rgba(245,158,11,0.16); color: #ffe0a9; }
-      .tag-accent { background: rgba(124,58,237,0.16); color: #e0cfff; }
-    }
-
-    .note {
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: rgba(245, 158, 11, 0.08);
-      border: 1px solid rgba(245, 158, 11, 0.16);
-      color: #b76f00;
-      font-size: 12px;
-      line-height: 1.65;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .note { color: #ffdca0; }
-    }
-
-    .empty {
-      padding: 28px 20px;
-      border-radius: 22px;
-      background: rgba(255,255,255,0.04);
-      border: 1px dashed var(--line);
-      color: var(--muted);
-      text-align: center;
-      line-height: 1.8;
-      font-size: 13px;
-    }
-
-    .footer {
-      margin-top: 18px;
-      padding: 18px 20px;
-      border-radius: 26px;
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      flex-wrap: wrap;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .footer a { color: var(--primary); text-decoration: none; }
-
-    .pulse {
-      display: inline-flex;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--success);
-      box-shadow: 0 0 0 0 rgba(17,185,129,0.7);
-      animation: pulse 1.8s infinite;
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(17,185,129,0.7); }
-      70% { box-shadow: 0 0 0 12px rgba(17,185,129,0); }
-      100% { box-shadow: 0 0 0 0 rgba(17,185,129,0); }
-    }
-
-    .loading-bar {
-      width: 100%;
-      height: 8px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.06);
-      overflow: hidden;
-      display: none;
-      margin-top: 14px;
-    }
-
-    .loading-bar.active { display: block; }
-
-    .loading-bar span {
-      display: block;
-      width: 38%;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
-      animation: loader 1.2s ease-in-out infinite;
-    }
-
-    @keyframes loader {
-      0% { transform: translateX(-120%); }
-      100% { transform: translateX(360%); }
-    }
-
-    @media (max-width: 1120px) {
-      .hero-grid,
-      .layout { grid-template-columns: 1fr; }
-      .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-
-    @media (max-width: 760px) {
-      .shell { width: min(calc(100% - 20px), var(--max)); }
-      .topbar { border-radius: 26px; }
-      .wallet-form,
-      .metrics,
-      .insight-grid { grid-template-columns: 1fr; }
-      .hero,
-      .card { padding: 18px; }
-      .hero h2 { max-width: 100%; }
-      .activity-item { grid-template-columns: 1fr; }
-      .activity-meta { justify-items: start; text-align: left; }
-    }
-  </style>
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+  <link rel="stylesheet" href="./css/styles.css" />
 </head>
 <body>
   <div class="grid-overlay"></div>
@@ -772,35 +21,32 @@
   <main class="shell">
     <section class="topbar glass">
       <div class="brand">
-        <div class="brand-mark" aria-label="ArcLume logo">
-          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-            <path d="M14 46.5L32 14L50 46.5" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M22.5 33H41.5" stroke="white" stroke-width="5" stroke-linecap="round"/>
-            <path d="M32 14L32 50" stroke="rgba(255,255,255,0.8)" stroke-width="3.5" stroke-linecap="round"/>
-          </svg>
-        </div>
+        <a class="brand-mark" href="./" aria-label="ArcLume home">
+          <img src="./assets/arclume-logo-mark.svg" alt="" />
+        </a>
         <div class="brand-copy">
           <h1>ArcLume</h1>
-          <p>Arc wallet intelligence, refined for a cleaner first impression.</p>
+          <p>Premium wallet intelligence, public Arc House updates, and a cleaner Arc-first dashboard with adaptive light and dark mode.</p>
         </div>
       </div>
       <div class="top-actions">
         <div class="pill"><span class="dot"></span><span id="rpcStatusText">Arc network checking</span></div>
         <div class="pill">Chain ID <strong>5042002</strong></div>
+        <div class="pill">Theme <strong>System</strong></div>
       </div>
     </section>
 
     <section class="hero glass">
       <div class="hero-grid">
         <div>
-          <div class="eyebrow"><span class="pulse"></span> Arc testnet intelligence experience</div>
-          <h2><span class="gradient-text">A better face for</span> your Arc wallet view.</h2>
+          <div class="eyebrow"><span class="pulse"></span> Arc wallet and community signal layer</div>
+          <h2><span class="gradient-text">Know your wallet,</span> know the Arc House pulse.</h2>
           <p>
-            ArcLume is the upgraded version of Arc-Hub, redesigned with a richer fintech palette, adaptive light and dark theming, live wallet balance, network health, Arcscan linking, and a cleaner premium experience without fake random data.
+            ArcLume combines live Arc Testnet wallet checks with a premium public Arc House layer, upcoming events, featured content, Architect program guidance, contribution rules, and a clear privacy boundary around login-gated personal community data.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#wallet-checker">Launch wallet lookup</a>
-            <a class="btn btn-secondary" href="https://testnet.arcscan.app" target="_blank" rel="noreferrer">Open Arcscan</a>
+            <a class="btn btn-primary" href="#wallet-checker">Launch lookup</a>
+            <a class="btn btn-secondary" href="https://community.arc.network/home" target="_blank" rel="noreferrer">Open Arc House</a>
           </div>
         </div>
 
@@ -816,11 +62,15 @@
               <span>Native gas token</span>
               <span>USDC</span>
             </div>
+            <div class="meta-row">
+              <span>Community mode</span>
+              <span>Public feed loaded</span>
+            </div>
           </div>
           <div class="mini-panel">
-            <div class="label">Why the rename</div>
-            <p style="margin:0; color:var(--muted); line-height:1.75; font-size:13px;">
-              ArcLume feels more premium than Arc-Hub, keeps the Arc identity, and now carries a cleaner fintech-grade visual system that looks polished in both light and dark mode.
+            <div class="label">Identity boundary</div>
+            <p class="panel-copy">
+              Wallet-only mode can show real Arc onchain data and Arc House public updates. Private fields like linked email, personal points, badges, and event participation remain clearly marked as login-gated.
             </p>
           </div>
         </div>
@@ -834,10 +84,10 @@
             <div>
               <h3>Wallet lookup</h3>
               <p>
-                Paste any Arc-compatible wallet address to load live balance, nonce, recent block context, explorer activity, and a cleaner reputation-style view.
+                Paste any Arc-compatible wallet address to load live balance, nonce, wallet type, explorer activity, and a joined community-aware view that explains what is public and what still requires Arc House login.
               </p>
             </div>
-            <div class="tag tag-primary">Premium upgrade</div>
+            <div class="tag tag-primary">ArcLume V3</div>
           </div>
 
           <div class="wallet-form">
@@ -845,13 +95,14 @@
               <span>⌁</span>
               <input id="walletInput" type="text" placeholder="Enter a wallet address, 0x..." autocomplete="off" />
             </label>
-            <button class="btn btn-primary" id="analyzeBtn">Analyze wallet</button>
+            <button class="btn btn-primary" id="analyzeBtn" type="button">Analyze wallet</button>
           </div>
 
           <div class="sub-actions">
-            <button class="ghost-btn" id="useDemoAddress">Try sample address</button>
-            <button class="ghost-btn" id="copyNetworkConfig">Copy Arc network config</button>
-            <a class="ghost-btn" href="https://faucet.circle.com" target="_blank" rel="noreferrer">Open faucet</a>
+            <button class="ghost-btn" id="useDemoAddress" type="button">Try sample address</button>
+            <button class="ghost-btn" id="copyNetworkConfig" type="button">Copy Arc network config</button>
+            <a class="ghost-btn" href="https://testnet.arcscan.app" target="_blank" rel="noreferrer">Open Arcscan</a>
+            <a class="ghost-btn" href="https://community.arc.network/public/contributors" target="_blank" rel="noreferrer">Open contributor board</a>
           </div>
 
           <div class="loading-bar" id="loadingBar"><span></span></div>
@@ -861,12 +112,12 @@
           <div class="card-header">
             <div>
               <h3>Wallet scorecard</h3>
-              <p>Live metrics are pulled from Arc Testnet RPC. Activity cards use Arcscan when the browser can reach the explorer endpoint.</p>
+              <p>Live wallet metrics come from Arc Testnet RPC. The feed stays honest, real where possible, clearly limited where Arc House keeps user data private.</p>
             </div>
             <div class="tag tag-success" id="liveModeTag">Live mode</div>
           </div>
 
-          <div class="metrics" id="metricsGrid">
+          <div class="metrics">
             <article class="metric">
               <div class="metric-label">Balance</div>
               <strong id="balanceValue">--</strong>
@@ -880,7 +131,7 @@
             <article class="metric">
               <div class="metric-label">Arc score</div>
               <strong id="scoreValue">--</strong>
-              <small>Simple reputation-style score based on live usage signals.</small>
+              <small>Reputation-style signal based on live usage and public activity context.</small>
             </article>
             <article class="metric">
               <div class="metric-label">Wallet type</div>
@@ -893,16 +144,64 @@
         <section class="card glass">
           <div class="card-header">
             <div>
+              <h3>Identity and community visibility</h3>
+              <p>This panel shows what ArcLume can determine now for the wallet and which Arc House fields are private until Arc provides a public or authenticated integration.</p>
+            </div>
+            <div class="tag tag-warning">Trust first</div>
+          </div>
+          <div class="identity-list">
+            <div class="identity-row"><span>Wallet address</span><span id="identityWallet">Not checked yet</span></div>
+            <div class="identity-row"><span>Linked email</span><span id="identityEmail">Not publicly exposed</span></div>
+            <div class="identity-row"><span>Arc House points</span><span id="identityPoints">Login required</span></div>
+            <div class="identity-row"><span>Architect tier</span><span id="identityTier">Login required</span></div>
+            <div class="identity-row"><span>Badges</span><span id="identityBadges">Login required</span></div>
+            <div class="identity-row"><span>Events participated</span><span id="identityEvents">Login required</span></div>
+          </div>
+        </section>
+
+        <section class="card glass">
+          <div class="card-header">
+            <div>
               <h3>Recent activity</h3>
-              <p>Explorer-driven activity feed for the wallet. If the explorer API is blocked in-browser, this panel stays honest and tells the user directly.</p>
+              <p>Explorer-driven activity feed for the wallet. If the explorer API is limited in the browser, the app still keeps live RPC balance and usage metrics.</p>
             </div>
             <a class="tag tag-accent" id="viewWalletTag" href="https://testnet.arcscan.app" target="_blank" rel="noreferrer">Open in Arcscan</a>
           </div>
 
-          <div id="activityNote" class="note" style="display:none;"></div>
+          <div id="activityNote" class="note hidden"></div>
           <div id="activityList" class="activity-list">
             <div class="empty">No wallet checked yet. Paste an address above to load live data.</div>
           </div>
+        </section>
+
+        <section class="card glass">
+          <div class="card-header">
+            <div>
+              <h3>Arc House community layer</h3>
+              <p>Curated public Arc House intelligence, upcoming events, featured content, and Architect program guidance built straight into ArcLume.</p>
+            </div>
+            <a class="tag tag-primary" href="https://community.arc.network/home" target="_blank" rel="noreferrer">Arc House ↗</a>
+          </div>
+
+          <div class="section-tabs">
+            <div class="tab-pill">Upcoming events</div>
+            <div class="tab-pill">Featured content</div>
+            <div class="tab-pill">Architects program</div>
+            <div class="tab-pill">Points and roles</div>
+          </div>
+
+          <div id="communityFeed" class="community-grid"></div>
+        </section>
+
+        <section class="card glass">
+          <div class="card-header">
+            <div>
+              <h3>Architect path and contribution flow</h3>
+              <p>The public Arc House docs make the community progression clearer. This section distills that path into a cleaner timeline inside ArcLume.</p>
+            </div>
+            <div class="tag tag-success">Public roadmap</div>
+          </div>
+          <div id="communityTimeline" class="timeline"></div>
         </section>
       </div>
 
@@ -911,7 +210,7 @@
           <div class="card-header">
             <div>
               <h3>Arc network panel</h3>
-              <p>Key network settings and status for the upgraded experience.</p>
+              <p>Key network settings and live testnet status for the upgraded experience.</p>
             </div>
           </div>
 
@@ -927,346 +226,64 @@
         <section class="card glass">
           <div class="card-header">
             <div>
-              <h3>Upgrade direction</h3>
-              <p>This makes ArcLume cleaner now, while preparing the visual system for the bigger product later.</p>
+              <h3>What ArcLume now adds</h3>
+              <p>The upgrade is no longer just a wallet checker, it is now a public Arc ecosystem signal board.</p>
             </div>
           </div>
           <div class="insight-grid">
             <article class="insight">
-              <h4>Brand uplift</h4>
+              <h4>Wallet intelligence</h4>
               <ul>
-                <li>New premium name, ArcLume</li>
-                <li>Sharper hero section and 4K-inspired visual depth</li>
-                <li>Cleaner information hierarchy</li>
+                <li>Live Arc balance</li>
+                <li>Nonce and wallet type</li>
+                <li>Explorer-aware recent activity</li>
               </ul>
             </article>
             <article class="insight">
-              <h4>Trust uplift</h4>
+              <h4>Public community feed</h4>
               <ul>
-                <li>Removed random fake balance patterns</li>
-                <li>Direct RPC balance and nonce loading</li>
-                <li>Explorer feed only when genuinely available</li>
+                <li>Upcoming Arc House events</li>
+                <li>Featured content and replays</li>
+                <li>Architect program essentials</li>
               </ul>
             </article>
             <article class="insight">
-              <h4>Better product role</h4>
+              <h4>Personal data boundary</h4>
               <ul>
-                <li>Acts as a public wallet intelligence layer</li>
-                <li>Can feed users into the future core platform</li>
-                <li>GitHub Pages friendly for fast deployment</li>
+                <li>No fake linked email claims</li>
+                <li>No fake badges or points</li>
+                <li>Clear login-gated identity states</li>
               </ul>
             </article>
             <article class="insight">
-              <h4>Next-ready foundation</h4>
+              <h4>Future-ready</h4>
               <ul>
-                <li>Visual system reusable in the new app</li>
-                <li>Brand can grow into reputation, identity, and payment workflows</li>
-                <li>Single file for fast first upgrade</li>
+                <li>Prepared for authenticated Arc House integration later</li>
+                <li>Design system reusable in the larger product</li>
+                <li>GitHub Pages friendly now</li>
               </ul>
             </article>
           </div>
+        </section>
+
+        <section class="card glass">
+          <div class="card-header">
+            <div>
+              <h3>Community resources</h3>
+              <p>Key public Arc House links worth keeping one click away.</p>
+            </div>
+          </div>
+          <div id="resourceGrid" class="resource-grid"></div>
         </section>
       </aside>
     </section>
 
     <footer class="footer glass">
-      <span>ArcLume, evolved from Arc-Hub into a premium Arc-first wallet intelligence experience.</span>
-      <span>Adaptive theme, fintech color system, live Arc Testnet checks, and Arcscan linking.</span>
+      <span>ArcLume, premium Arc wallet and community intelligence with adaptive theme and honest public data boundaries.</span>
+      <span>Live Arc Testnet checks, Arcscan linking, Arc House public updates, and Architect guidance in one place.</span>
     </footer>
   </main>
 
-  <script type="module">
-    import { ethers } from 'https://cdn.jsdelivr.net/npm/ethers@6.13.5/+esm';
-
-    const CONFIG = {
-      appName: 'ArcLume',
-      networkName: 'Arc Testnet',
-      chainId: 5042002,
-      rpcUrl: 'https://rpc.testnet.arc.network',
-      explorerUrl: 'https://testnet.arcscan.app',
-      explorerApi: 'https://testnet.arcscan.app/api',
-      faucetUrl: 'https://faucet.circle.com',
-      sampleAddress: '0x8004A818BFB912233c491871b3d84c89A494BD9e'
-    };
-
-    const els = {
-      walletInput: document.getElementById('walletInput'),
-      analyzeBtn: document.getElementById('analyzeBtn'),
-      latestBlock: document.getElementById('latestBlock'),
-      networkBlock: document.getElementById('networkBlock'),
-      gasPrice: document.getElementById('gasPrice'),
-      lastRefresh: document.getElementById('lastRefresh'),
-      balanceValue: document.getElementById('balanceValue'),
-      txCountValue: document.getElementById('txCountValue'),
-      scoreValue: document.getElementById('scoreValue'),
-      walletTypeValue: document.getElementById('walletTypeValue'),
-      rpcStatusText: document.getElementById('rpcStatusText'),
-      loadingBar: document.getElementById('loadingBar'),
-      activityList: document.getElementById('activityList'),
-      activityNote: document.getElementById('activityNote'),
-      viewWalletTag: document.getElementById('viewWalletTag'),
-      liveModeTag: document.getElementById('liveModeTag'),
-      rpcEndpoint: document.getElementById('rpcEndpoint'),
-      useDemoAddress: document.getElementById('useDemoAddress'),
-      copyNetworkConfig: document.getElementById('copyNetworkConfig')
-    };
-
-    const provider = new ethers.JsonRpcProvider(CONFIG.rpcUrl, {
-      name: CONFIG.networkName,
-      chainId: CONFIG.chainId
-    }, {
-      staticNetwork: true
-    });
-
-    const activityIcons = {
-      swap: '⇄',
-      bridge: '⇢',
-      transfer: '◎',
-      contract: '◇',
-      stake: '◌',
-      mint: '✦',
-      deploy: '⬡',
-      default: '•'
-    };
-
-    function abbreviate(value, front = 6, back = 4) {
-      if (!value) return '--';
-      if (value.length <= front + back) return value;
-      return `${value.slice(0, front)}...${value.slice(-back)}`;
-    }
-
-    function formatCompact(value, digits = 2) {
-      const num = Number(value);
-      if (!Number.isFinite(num)) return '--';
-      return new Intl.NumberFormat('en-US', {
-        notation: 'compact',
-        maximumFractionDigits: digits
-      }).format(num);
-    }
-
-    function formatUsdc(value) {
-      const num = Number(value);
-      if (!Number.isFinite(num)) return '--';
-      return new Intl.NumberFormat('en-US', {
-        minimumFractionDigits: num >= 1 ? 2 : 4,
-        maximumFractionDigits: num >= 1 ? 4 : 6
-      }).format(num);
-    }
-
-    function relativeTime(input) {
-      if (!input) return 'Unknown';
-      const diff = Date.now() - new Date(input).getTime();
-      const minutes = Math.floor(diff / 60000);
-      if (minutes < 1) return 'just now';
-      if (minutes < 60) return `${minutes}m ago`;
-      const hours = Math.floor(minutes / 60);
-      if (hours < 24) return `${hours}h ago`;
-      const days = Math.floor(hours / 24);
-      return `${days}d ago`;
-    }
-
-    function classifyTransaction(tx) {
-      const method = (tx.functionName || tx.method || '').toLowerCase();
-      const input = (tx.input || '').toLowerCase();
-      const value = Number(tx.value || 0);
-
-      if (method.includes('swap')) return { type: 'Swap', icon: activityIcons.swap, tag: 'tag-primary' };
-      if (method.includes('bridge') || method.includes('deposit') || method.includes('withdraw')) return { type: 'Bridge', icon: activityIcons.bridge, tag: 'tag-accent' };
-      if (method.includes('stake') || method.includes('unstake') || method.includes('liquidity')) return { type: 'Liquidity', icon: activityIcons.stake, tag: 'tag-warning' };
-      if (method.includes('mint')) return { type: 'Mint', icon: activityIcons.mint, tag: 'tag-success' };
-      if (!tx.to) return { type: 'Deploy', icon: activityIcons.deploy, tag: 'tag-warning' };
-      if (value > 0 || input === '0x') return { type: 'Transfer', icon: activityIcons.transfer, tag: 'tag-success' };
-      return { type: 'Contract call', icon: activityIcons.contract, tag: 'tag-primary' };
-    }
-
-    function computeScore({ balance, txCount, recentCount, uniqueTargets, isContract }) {
-      const balanceScore = Math.min(Math.floor(balance * 8), 40);
-      const txScore = Math.min(txCount * 4, 120);
-      const recentScore = Math.min(recentCount * 6, 60);
-      const diversityScore = Math.min(uniqueTargets * 5, 40);
-      const contractPenalty = isContract ? 0 : 10;
-      return balanceScore + txScore + recentScore + diversityScore + contractPenalty;
-    }
-
-    async function refreshNetworkPanel() {
-      try {
-        const [network, blockNumber, feeData] = await Promise.all([
-          provider.getNetwork(),
-          provider.getBlockNumber(),
-          provider.getFeeData()
-        ]);
-
-        els.latestBlock.textContent = formatCompact(blockNumber, 1);
-        els.networkBlock.textContent = formatCompact(blockNumber, 1);
-        els.rpcStatusText.textContent = `${network.name || CONFIG.networkName} online`;
-        els.gasPrice.textContent = feeData.gasPrice ? `${ethers.formatUnits(feeData.gasPrice, 'gwei')} gwei` : 'Unavailable';
-        els.lastRefresh.textContent = new Date().toLocaleTimeString();
-      } catch (error) {
-        els.rpcStatusText.textContent = 'Arc RPC unavailable';
-        els.latestBlock.textContent = '--';
-        els.networkBlock.textContent = '--';
-        els.gasPrice.textContent = 'Unavailable';
-      }
-    }
-
-    async function fetchExplorerTransactions(address) {
-      const url = `${CONFIG.explorerApi}?module=account&action=txlist&address=${address}&sort=desc&page=1&offset=10`;
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: { 'Accept': 'application/json' }
-      });
-
-      if (!response.ok) throw new Error(`Explorer request failed with status ${response.status}`);
-
-      const data = await response.json();
-      if (!data || !Array.isArray(data.result)) return [];
-      return data.result;
-    }
-
-    function setLoading(isLoading) {
-      els.analyzeBtn.disabled = isLoading;
-      els.analyzeBtn.textContent = isLoading ? 'Loading...' : 'Analyze wallet';
-      els.loadingBar.classList.toggle('active', isLoading);
-    }
-
-    function renderActivities(transactions, note = '') {
-      els.activityNote.style.display = note ? 'block' : 'none';
-      els.activityNote.textContent = note;
-
-      if (!transactions.length) {
-        els.activityList.innerHTML = '<div class="empty">No recent explorer activity was loaded for this wallet in this browser session.</div>';
-        return;
-      }
-
-      els.activityList.innerHTML = transactions.map((tx) => {
-        const details = classifyTransaction(tx);
-        const ts = tx.timeStamp ? new Date(Number(tx.timeStamp) * 1000).toISOString() : null;
-        const amount = Number(tx.value || 0) > 0 ? formatUsdc(Number(ethers.formatUnits(tx.value || '0', 18))) + ' USDC' : 'Interaction';
-        const methodLabel = tx.functionName && tx.functionName !== '0x' ? tx.functionName : details.type;
-
-        return `
-          <article class="activity-item">
-            <div class="activity-icon">${details.icon}</div>
-            <div class="activity-main">
-              <h4>${methodLabel}</h4>
-              <p>${abbreviate(tx.hash, 10, 8)} • ${ts ? relativeTime(ts) : 'Unknown time'} • ${amount}</p>
-            </div>
-            <div class="activity-meta">
-              <span class="tag ${details.tag}">${details.type}</span>
-              <a href="${CONFIG.explorerUrl}/tx/${tx.hash}" target="_blank" rel="noreferrer" style="color:#cae0ff; font-size:12px; text-decoration:none;">View tx ↗</a>
-            </div>
-          </article>
-        `;
-      }).join('');
-    }
-
-    async function analyzeWallet(address) {
-      if (!ethers.isAddress(address)) {
-        alert('Please enter a valid EVM wallet address.');
-        return;
-      }
-
-      setLoading(true);
-      els.viewWalletTag.href = `${CONFIG.explorerUrl}/address/${address}`;
-      els.viewWalletTag.textContent = 'Open wallet in Arcscan';
-      els.activityList.innerHTML = '<div class="empty">Loading recent activity…</div>';
-      els.activityNote.style.display = 'none';
-
-      try {
-        const [balanceBn, txCount, code, latestBlock] = await Promise.all([
-          provider.getBalance(address),
-          provider.getTransactionCount(address),
-          provider.getCode(address),
-          provider.getBlockNumber()
-        ]);
-
-        const balance = Number(ethers.formatUnits(balanceBn, 18));
-        const isContract = code && code !== '0x';
-
-        els.balanceValue.textContent = `${formatUsdc(balance)} USDC`;
-        els.txCountValue.textContent = formatCompact(txCount, 0);
-        els.walletTypeValue.textContent = isContract ? 'Contract' : 'EOA';
-        els.latestBlock.textContent = formatCompact(latestBlock, 1);
-        els.networkBlock.textContent = formatCompact(latestBlock, 1);
-        els.liveModeTag.textContent = 'Live mode';
-
-        let explorerTransactions = [];
-        let explorerNote = '';
-
-        try {
-          explorerTransactions = await fetchExplorerTransactions(address);
-          if (!explorerTransactions.length) {
-            explorerNote = 'Explorer reached, but no recent transactions were returned for this wallet.';
-          }
-        } catch (error) {
-          explorerNote = 'Recent activity feed could not be loaded from the explorer in this browser session. Live balance and wallet metrics are still real.';
-          els.liveModeTag.textContent = 'RPC live, explorer limited';
-        }
-
-        const uniqueTargets = new Set(explorerTransactions.map(tx => tx.to).filter(Boolean)).size;
-        const score = computeScore({
-          balance,
-          txCount,
-          recentCount: explorerTransactions.length,
-          uniqueTargets,
-          isContract
-        });
-
-        els.scoreValue.textContent = formatCompact(score, 0);
-        renderActivities(explorerTransactions, explorerNote);
-        els.lastRefresh.textContent = new Date().toLocaleTimeString();
-      } catch (error) {
-        console.error(error);
-        els.balanceValue.textContent = '--';
-        els.txCountValue.textContent = '--';
-        els.scoreValue.textContent = '--';
-        els.walletTypeValue.textContent = '--';
-        els.activityNote.style.display = 'block';
-        els.activityNote.textContent = 'Unable to load wallet data right now. Check the address format, then retry.';
-        els.activityList.innerHTML = '<div class="empty">Wallet lookup failed. Try again in a moment.</div>';
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    async function copyNetworkConfig() {
-      const text = [
-        `Network Name: ${CONFIG.networkName}`,
-        `RPC URL: ${CONFIG.rpcUrl}`,
-        `Chain ID: ${CONFIG.chainId}`,
-        `Currency Symbol: USDC`,
-        `Explorer URL: ${CONFIG.explorerUrl}`
-      ].join('\n');
-
-      try {
-        await navigator.clipboard.writeText(text);
-        els.copyNetworkConfig.textContent = 'Copied network config';
-        setTimeout(() => { els.copyNetworkConfig.textContent = 'Copy Arc network config'; }, 1600);
-      } catch {
-        alert(text);
-      }
-    }
-
-    els.analyzeBtn.addEventListener('click', () => analyzeWallet(els.walletInput.value.trim()));
-    els.walletInput.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') analyzeWallet(els.walletInput.value.trim());
-    });
-    els.useDemoAddress.addEventListener('click', () => {
-      els.walletInput.value = CONFIG.sampleAddress;
-      analyzeWallet(CONFIG.sampleAddress);
-    });
-    els.copyNetworkConfig.addEventListener('click', copyNetworkConfig);
-
-    const queryAddress = new URLSearchParams(window.location.search).get('address');
-    if (queryAddress) els.walletInput.value = queryAddress;
-
-    els.rpcEndpoint.textContent = CONFIG.rpcUrl;
-    refreshNetworkPanel();
-    setInterval(refreshNetworkPanel, 30000);
-
-    if (queryAddress && ethers.isAddress(queryAddress)) {
-      analyzeWallet(queryAddress);
-    }
-    </script>
+  <script type="module" src="./js/app.js"></script>
 </body>
 </html>
