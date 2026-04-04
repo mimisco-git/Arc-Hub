@@ -3,12 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ArcLume V5, Arc Wallet + Arc House Companion</title>
-  <meta name="description" content="ArcLume V5 is a premium green-black Arc dashboard for live wallet intelligence, Arc House sign-in handoff, journey tracking, event priorities, and public community updates." />
+  <title>ArcLume V6, Arc Wallet + Arc House Companion</title>
+  <meta name="description" content="ArcLume V6 is a premium Arc wallet and Arc House companion with saved profiles, smarter wallet insights, event filters, polished status states, and a cleaner sign-in handoff." />
   <meta name="theme-color" content="#07110d" />
-  <meta property="og:title" content="ArcLume V5" />
+  <meta property="og:title" content="ArcLume V6" />
   <meta property="og:description" content="Premium Arc wallet and Arc House companion dashboard." />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="./assets/og-preview.svg" />
+  <meta property="og:url" content="https://mimisco-git.github.io/Arc-Hub/" />
+  <link rel="canonical" href="https://mimisco-git.github.io/Arc-Hub/" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -17,6 +20,7 @@
 </head>
 <body>
   <div class="grid-overlay" aria-hidden="true"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <main class="shell">
     <section class="topbar glass">
@@ -26,7 +30,7 @@
         </div>
         <div class="brand-copy">
           <h1>ArcLume</h1>
-          <p>Premium Arc wallet and Arc House companion with a richer green-black system, live Arc wallet checks, sign-in handoff, journey tracking, and smarter event priorities.</p>
+          <p>Wallet intelligence, Arc House handoff, saved profile mode, event priorities, and a sharper green-black premium system.</p>
         </div>
       </div>
 
@@ -40,10 +44,10 @@
     <section class="hero glass">
       <div class="hero-grid">
         <div>
-          <div class="eyebrow"><span class="pulse"></span> Wallet signal, identity prep, Arc House next step</div>
-          <h2><span class="gradient-text">Make your Arc flow clearer,</span> from wallet to community.</h2>
+          <div class="eyebrow"><span class="pulse"></span> Wallet signal, identity prep, community route</div>
+          <h2><span class="gradient-text">A clearer path,</span> from Arc wallet to Arc House.</h2>
           <p>
-            ArcLume V5 combines real Arc Testnet wallet intelligence, email-assisted Arc House handoff, a guided journey tracker, and richer event priority cards, while keeping private Arc House profile data clearly behind sign-in where it belongs.
+            ArcLume V6 adds saved profiles, smarter wallet insight cards, stronger empty and error states, richer event priority filters, and a cleaner Arc House sign-in handoff, while keeping private community data behind the login boundary.
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#lookup">Start profile lookup</a>
@@ -55,29 +59,22 @@
           <div class="mini-panel">
             <div class="label">Network snapshot</div>
             <p class="value-lg" id="latestBlock">--</p>
-            <div class="meta-row">
-              <span>Latest block</span>
-              <span id="networkName">Arc Testnet</span>
-            </div>
-            <div class="meta-row">
-              <span>Gas token</span>
-              <span>USDC</span>
-            </div>
-            <div class="meta-row">
-              <span>Community mode</span>
-              <span id="communityModeLabel">Awaiting input</span>
-            </div>
+            <div class="meta-row"><span>Latest block</span><span id="networkName">Arc Testnet</span></div>
+            <div class="meta-row"><span>Gas token</span><span>USDC</span></div>
+            <div class="meta-row"><span>Community data</span><span id="communityFeedMode">Public snapshot</span></div>
           </div>
 
           <div class="mini-panel">
-            <div class="label">Privacy boundary</div>
+            <div class="label">Data boundary</div>
             <p>
-              ArcLume can show real Arc onchain data and public Arc House updates. Private community details like linked email, personal points, badges, and event history still require Arc House sign-in.
+              ArcLume can show real Arc onchain data and public Arc House resources. Personal Arc House points, badges, and participation history still require Arc House sign-in.
             </p>
           </div>
         </div>
       </div>
     </section>
+
+    <section class="card glass banner-card hidden" id="stateBanner" aria-live="polite"></section>
 
     <section class="layout">
       <div class="stack">
@@ -86,10 +83,10 @@
             <div>
               <h3>Wallet lookup and Arc House entry</h3>
               <p>
-                Use your wallet address for Arc network intelligence and your email address to prepare a cleaner Arc House handoff. ArcLume will save your local profile mode, guide your next action, and give you a better route into Arc House.
+                Use your wallet address for Arc network intelligence and your email address to prepare a cleaner Arc House handoff. Save the profile locally, share a prefilled link, and resume where you left off.
               </p>
             </div>
-            <div class="tag tag-primary">V5 upgrade</div>
+            <div class="tag tag-primary">V6 upgrade</div>
           </div>
 
           <form class="dual-form" id="profileForm">
@@ -107,14 +104,14 @@
           <div class="sub-actions">
             <button class="ghost-btn" id="useDemoAddress" type="button">Load sample wallet</button>
             <button class="ghost-btn ghost-btn-strong" id="openSignInModal" type="button">Open Arc House access panel</button>
-            <a class="ghost-btn" href="https://community.arc.network/home/resources/architects-tiers-and-benefits" target="_blank" rel="noreferrer">Architect tiers</a>
-            <a class="ghost-btn" href="https://community.arc.network/public/contributors/contribution-rules" target="_blank" rel="noreferrer">Contribution rules</a>
-            <a class="ghost-btn" id="quickWalletLink" href="https://testnet.arcscan.app" target="_blank" rel="noreferrer">Open wallet on Arcscan</a>
-            <button class="ghost-btn" id="copySnapshot" type="button">Copy profile snapshot</button>
+            <button class="ghost-btn" id="saveProfileBtn" type="button">Save profile mode</button>
+            <button class="ghost-btn" id="clearProfileBtn" type="button">Clear saved profile</button>
+            <button class="ghost-btn" id="copyShareLink" type="button">Copy share link</button>
+            <button class="ghost-btn" id="copySnapshot" type="button">Copy summary snapshot</button>
           </div>
 
           <div class="helper-note">
-            Your email is stored locally in your browser for ArcLume profile mode only. ArcLume does not claim that email alone can reveal private Arc House stats. For that, use the Arc House sign-in flow.
+            Email is saved locally in your browser when you choose save profile mode. ArcLume does not claim that email alone can reveal private Arc House stats.
           </div>
 
           <div class="loading-bar" id="loadingBar"><span></span></div>
@@ -124,7 +121,7 @@
           <div class="card-header">
             <div>
               <h3>Wallet scorecard</h3>
-              <p>Live Arc wallet metrics come from Arc Testnet. Community identity stays honest, with a clear separation between public Arc House data and login-gated profile details.</p>
+              <p>Live Arc wallet metrics come from Arc Testnet. Community identity stays honest, with a clear split between public Arc House information and sign-in-only profile details.</p>
             </div>
             <div class="tag tag-success" id="liveModeTag">Live mode</div>
           </div>
@@ -156,79 +153,124 @@
         <section class="card glass">
           <div class="card-header">
             <div>
-              <h3>Profile readiness and Arc House bridge</h3>
-              <p>Email makes ArcLume feel more personal, but Arc House still controls private account data. This section prepares the handoff and keeps the personal fields honest.</p>
+              <h3>Smarter wallet insights</h3>
+              <p>Clearer insight cards to understand how warm the wallet is and how much signal it carries for the next Arc House step.</p>
             </div>
-            <div class="tag tag-warning">Trust first</div>
+            <div class="tag tag-accent" id="walletBadgeTag">Fresh wallet</div>
           </div>
 
-          <div class="identity-list">
-            <div class="identity-row"><span>Wallet address</span><span id="identityWallet">Not checked yet</span></div>
-            <div class="identity-row"><span>Profile email</span><span id="identityEmail">Optional</span></div>
-            <div class="identity-row"><span>Arc House status</span><span id="identityStatus">Ready for wallet or sign-in</span></div>
-            <div class="identity-row"><span>Linked account proof</span><span id="identityProof">Not verified</span></div>
-            <div class="identity-row"><span>Points</span><span id="identityPoints">Login required</span></div>
-            <div class="identity-row"><span>Architect tier</span><span id="identityTier">Login required</span></div>
-            <div class="identity-row"><span>Badges</span><span id="identityBadges">Login required</span></div>
-            <div class="identity-row"><span>Events participated</span><span id="identityEvents">Login required</span></div>
-          </div>
-
-          <div class="mini-metrics top-gap">
+          <div class="mini-metrics insights-grid-3">
             <article class="mini-stat">
-              <span class="mini-stat-label">Readiness score</span>
-              <strong id="readinessScore">0%</strong>
-              <small>Wallet + email completeness inside ArcLume.</small>
+              <span class="mini-stat-label">First seen</span>
+              <strong id="firstSeenValue">--</strong>
+              <small>Earliest explorer timestamp we could load.</small>
             </article>
             <article class="mini-stat">
-              <span class="mini-stat-label">Community mode</span>
-              <strong id="communityModeValue">Awaiting input</strong>
-              <small>Profile preparation state for Arc House context.</small>
+              <span class="mini-stat-label">Activity streak</span>
+              <strong id="streakValue">--</strong>
+              <small>Consecutive active days from recent explorer activity.</small>
             </article>
-          </div>
-
-          <div class="note top-gap" id="identityNote">
-            Add both wallet and email to unlock the fuller ArcLume profile mode. Personal Arc House stats still remain login-gated unless Arc provides an authenticated integration later.
-          </div>
-
-          <div class="action-panel top-gap">
-            <div class="action-panel-copy">
-              <h4>Need your Arc House points, badges, or event record?</h4>
-              <p>ArcLume prepares the wallet and email side. Arc House sign in is still required for personal community stats that are not publicly exposed.</p>
-            </div>
-            <div class="action-panel-links">
-              <button class="btn btn-primary" type="button" id="openSignInModalInline">Open access panel</button>
-              <a class="btn btn-secondary" href="https://community.arc.network/home/resources/architects-overview" target="_blank" rel="noreferrer">Architects overview</a>
-            </div>
+            <article class="mini-stat">
+              <span class="mini-stat-label">Transaction diversity</span>
+              <strong id="diversityValue">--</strong>
+              <small>Unique destination count in recent activity.</small>
+            </article>
+            <article class="mini-stat">
+              <span class="mini-stat-label">Contract depth</span>
+              <strong id="contractDepthValue">--</strong>
+              <small>How often the wallet interacts beyond plain transfers.</small>
+            </article>
+            <article class="mini-stat">
+              <span class="mini-stat-label">Recent activity</span>
+              <strong id="recentActivityValue">--</strong>
+              <small>Recent transaction volume loaded in this session.</small>
+            </article>
+            <article class="mini-stat">
+              <span class="mini-stat-label">Readiness badge</span>
+              <strong id="readinessBadgeValue">Awaiting setup</strong>
+              <small>Wallet + email + saved profile + Arc House handoff status.</small>
+            </article>
           </div>
         </section>
 
-        <section class="card glass">
-          <div class="card-header">
-            <div>
-              <h3>Wallet to community journey tracker</h3>
-              <p>A simpler progress path from onchain identity to Arc House participation, based on the public Architect program and contributor flow.</p>
+        <section class="split-section">
+          <section class="card glass">
+            <div class="card-header">
+              <div>
+                <h3>Profile readiness and Arc House bridge</h3>
+                <p>Email makes ArcLume feel more personal, but Arc House still controls private account data. This section prepares the handoff and keeps profile fields honest.</p>
+              </div>
+              <div class="tag tag-warning">Trust first</div>
             </div>
-            <div class="tag tag-success" id="journeyStatusTag">Start here</div>
-          </div>
 
-          <div class="journey-progress">
-            <div class="journey-progress-bar"><span id="journeyProgressFill"></span></div>
-            <div class="journey-progress-copy"><strong id="journeyPercent">0%</strong><span id="journeySummary">Waiting for wallet and email</span></div>
-          </div>
+            <div class="identity-list">
+              <div class="identity-row"><span>Wallet address</span><span id="identityWallet">Not checked yet</span></div>
+              <div class="identity-row"><span>Profile email</span><span id="identityEmail">Optional</span></div>
+              <div class="identity-row"><span>Arc House status</span><span id="identityStatus">Ready for wallet or sign-in</span></div>
+              <div class="identity-row"><span>Linked account proof</span><span id="identityProof">Not verified</span></div>
+              <div class="identity-row"><span>Points</span><span id="identityPoints">Login required</span></div>
+              <div class="identity-row"><span>Architect tier</span><span id="identityTier">Login required</span></div>
+              <div class="identity-row"><span>Badges</span><span id="identityBadges">Login required</span></div>
+              <div class="identity-row"><span>Events participated</span><span id="identityEvents">Login required</span></div>
+            </div>
 
-          <div class="journey-grid" id="journeyGrid"></div>
+            <div class="mini-metrics top-gap">
+              <article class="mini-stat">
+                <span class="mini-stat-label">Readiness score</span>
+                <strong id="readinessScore">0%</strong>
+                <small>Wallet + email + saved profile completeness.</small>
+              </article>
+              <article class="mini-stat">
+                <span class="mini-stat-label">Community mode</span>
+                <strong id="communityModeValue">Awaiting input</strong>
+                <small>Profile preparation state for Arc House context.</small>
+              </article>
+            </div>
+
+            <div class="note top-gap" id="identityNote">
+              Add both wallet and email to unlock the fuller ArcLume profile mode. Personal Arc House stats still remain sign-in-only unless Arc provides an authenticated integration later.
+            </div>
+
+            <div class="action-panel top-gap">
+              <div class="action-panel-copy">
+                <h4>Most useful next action</h4>
+                <p id="nextActionText">Start with a wallet lookup, then add your email if you want ArcLume to prepare your Arc House handoff.</p>
+              </div>
+              <div class="action-panel-links">
+                <button class="btn btn-primary" type="button" id="openSignInFromIdentity">Continue to Arc House sign in</button>
+                <button class="btn btn-secondary" type="button" id="copyEmailBtn">Copy email for sign-in</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="card glass">
+            <div class="card-header">
+              <div>
+                <h3>Wallet-to-community journey</h3>
+                <p>Each step shows how far the profile has progressed from wallet analysis to Arc House readiness.</p>
+              </div>
+              <div class="tag tag-success" id="journeyTag">Step 0</div>
+            </div>
+
+            <div class="journey-grid" id="journeyGrid"></div>
+          </section>
         </section>
 
         <section class="card glass">
           <div class="card-header">
             <div>
               <h3>Recent activity</h3>
-              <p>Explorer-driven wallet activity. If the explorer API is browser-limited, ArcLume still shows live RPC-based wallet metrics.</p>
+              <p>Explorer-driven activity feed for the wallet. If the explorer API is limited in the browser, ArcLume keeps the failure state clean instead of inventing data.</p>
             </div>
-            <a class="tag tag-accent" id="viewWalletTag" href="https://testnet.arcscan.app" target="_blank" rel="noreferrer">Open in Arcscan</a>
+            <div class="inline-actions">
+              <button class="ghost-btn small" id="copyWalletBtn" type="button">Copy wallet</button>
+              <button class="ghost-btn small" id="copyArcscanBtn" type="button">Copy Arcscan link</button>
+              <a class="tag tag-accent" id="viewWalletTag" href="https://testnet.arcscan.app" target="_blank" rel="noreferrer">Open in Arcscan</a>
+            </div>
           </div>
 
-          <div id="activityNote" class="note" style="display:none;"></div>
+          <div class="filter-row" id="activityFilters"></div>
+          <div id="activityNote" class="note hidden"></div>
           <div id="activityList" class="activity-list">
             <div class="empty">No wallet checked yet. Paste an address above to load live data.</div>
           </div>
@@ -237,42 +279,30 @@
         <section class="card glass">
           <div class="card-header">
             <div>
-              <h3>Event priority board</h3>
-              <p>Current Arc House event slate, reordered into a clearer action board with urgency, fit, and why each event matters.</p>
+              <h3>Arc House priority board</h3>
+              <p>Public Arc House pages and Architect docs distilled into actionable cards, filters, source labels, and refresh metadata.</p>
             </div>
-            <a class="tag tag-primary" href="https://community.arc.network/home" target="_blank" rel="noreferrer">Arc House events ↗</a>
-          </div>
-          <div class="event-grid" id="eventGrid"></div>
-        </section>
-
-        <section class="card glass">
-          <div class="card-header">
-            <div>
-              <h3>Arc House public feed</h3>
-              <p>Public Arc House updates curated into a premium dashboard layer, including featured content, Architect resources, and current builder opportunities.</p>
-            </div>
-            <a class="tag tag-primary" href="https://community.arc.network/home" target="_blank" rel="noreferrer">Arc House ↗</a>
+            <div class="tag tag-primary" id="communityStatusTag">Static public snapshot</div>
           </div>
 
-          <div class="section-tabs">
-            <div class="tab-pill">Featured content</div>
-            <div class="tab-pill">Architect resources</div>
-            <div class="tab-pill">Hackathon signal</div>
-            <div class="tab-pill">Builder opportunities</div>
+          <div class="community-meta-bar">
+            <span>Source mode: <strong id="communityModeText">Static public snapshot</strong></span>
+            <span>Bundle built: <strong id="communityBuildTime">--</strong></span>
+            <span>Session refreshed: <strong id="communityRefreshTime">--</strong></span>
           </div>
-
+          <div class="filter-row" id="communityFilters"></div>
           <div id="communityFeed" class="community-grid"></div>
         </section>
 
         <section class="card glass">
           <div class="card-header">
             <div>
-              <h3>Architect journey</h3>
-              <p>The public Architect docs now show clearer tiers, benefits, and roles. ArcLume turns that into a more useful path view.</p>
+              <h3>Public Arc House resources</h3>
+              <p>Keep the most relevant public resources one click away while private profile data stays behind the actual Arc House login.</p>
             </div>
-            <div class="tag tag-success">Public roadmap</div>
+            <div class="tag tag-muted">Public resources</div>
           </div>
-          <div id="communityTimeline" class="timeline"></div>
+          <div id="resourceGrid" class="resource-grid"></div>
         </section>
       </div>
 
@@ -281,7 +311,7 @@
           <div class="card-header">
             <div>
               <h3>Arc network panel</h3>
-              <p>Key testnet settings and live network status.</p>
+              <p>Key network settings and live status for the Arc side of the dashboard.</p>
             </div>
           </div>
 
@@ -297,100 +327,90 @@
         <section class="card glass">
           <div class="card-header">
             <div>
-              <h3>ArcLume strategic layer</h3>
-              <p>The site is no longer just a checker. It now helps users understand next steps inside the Arc ecosystem.</p>
+              <h3>Why this version is stronger</h3>
+              <p>V6 is about utility and trust, not just more visuals.</p>
             </div>
           </div>
           <div class="insight-grid">
             <article class="insight">
-              <h4>Wallet intelligence</h4>
+              <h4>Better trust</h4>
               <ul>
-                <li>Live Arc balance</li>
-                <li>Nonce and wallet type</li>
-                <li>Explorer-aware recent activity</li>
+                <li>Clear error states</li>
+                <li>No fake fallback stats</li>
+                <li>Community source labels and refresh metadata</li>
               </ul>
             </article>
             <article class="insight">
-              <h4>Arc House handoff</h4>
+              <h4>Better utility</h4>
               <ul>
-                <li>Modal-style access panel</li>
-                <li>Email-assisted local profile prep</li>
-                <li>Clear next steps to sign in</li>
+                <li>Saved profiles and auto-load</li>
+                <li>Share links and quick copy actions</li>
+                <li>Cleaner sign-in handoff</li>
               </ul>
             </article>
             <article class="insight">
-              <h4>Journey logic</h4>
+              <h4>Better insight</h4>
               <ul>
-                <li>Track wallet + email readiness</li>
-                <li>See where Arc House starts</li>
-                <li>Understand Tier 1 target path</li>
+                <li>First seen date</li>
+                <li>Activity streak and diversity</li>
+                <li>Wallet warmth badge</li>
               </ul>
             </article>
             <article class="insight">
-              <h4>Event prioritization</h4>
+              <h4>Better planning</h4>
               <ul>
-                <li>Urgency and fit labels</li>
-                <li>Actionable event cards</li>
-                <li>Cleaner builder navigation</li>
+                <li>Priority board filters</li>
+                <li>Architect milestones</li>
+                <li>Contribution rule cues</li>
               </ul>
             </article>
           </div>
-        </section>
-
-        <section class="card glass">
-          <div class="card-header">
-            <div>
-              <h3>Community resources</h3>
-              <p>Key public Arc House resources worth keeping one click away.</p>
-            </div>
-          </div>
-          <div id="resourceGrid" class="resource-grid"></div>
-        </section>
-
-        <section class="card glass">
-          <div class="card-header">
-            <div>
-              <h3>Community spotlight</h3>
-              <p>Short signal notes from the current Arc House public pages.</p>
-            </div>
-          </div>
-          <div id="spotlightPanel" class="spotlight-grid"></div>
         </section>
       </aside>
     </section>
 
     <footer class="footer glass">
-      <span>ArcLume V5, premium Arc wallet and community intelligence with adaptive theme and honest Arc House data boundaries.</span>
-      <span>Live Arc Testnet checks, Arcscan linking, Arc House public updates, sign-in handoff, and Architect guidance in one place.</span>
+      <span>ArcLume V6, premium Arc wallet and Arc House companion with saved profiles, wallet insight depth, and cleaner public-data boundaries.</span>
+      <span>Live Arc Testnet checks, Arcscan linking, public Arc House resource cards, and sign-in handoff in one place.</span>
     </footer>
   </main>
 
-  <div class="modal" id="signInModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="signInModalTitle">
-    <div class="modal-backdrop" data-close-modal></div>
-    <div class="modal-panel glass">
-      <button class="modal-close" type="button" id="closeModalBtn" aria-label="Close">×</button>
-      <div class="modal-eyebrow">Arc House access panel</div>
-      <h3 id="signInModalTitle">Continue from ArcLume into Arc House</h3>
+  <div class="modal hidden" id="signInModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal="true"></div>
+    <div class="modal-panel glass" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" type="button" id="closeSignInModal" aria-label="Close panel">×</button>
+      <div class="label">Arc House access panel</div>
+      <h3 id="modalTitle">Take the clean handoff into Arc House</h3>
       <p class="modal-copy">
-        ArcLume can prepare your wallet and email locally. Arc House sign-in is still the supported place for personal points, badges, contribution history, and private profile data.
+        ArcLume prepares the wallet and email context, but personal Arc House points, badges, and event history still live behind the real Arc House sign-in flow.
       </p>
 
-      <div class="modal-summary">
-        <div class="modal-summary-row"><span>Wallet</span><strong id="modalWalletValue">Not set</strong></div>
-        <div class="modal-summary-row"><span>Email</span><strong id="modalEmailValue">Not set</strong></div>
-        <div class="modal-summary-row"><span>Readiness</span><strong id="modalReadinessValue">0%</strong></div>
-        <div class="modal-summary-row"><span>Best next step</span><strong id="modalNextStepValue">Add wallet and email</strong></div>
+      <div class="modal-grid">
+        <article class="modal-stat">
+          <span>Wallet</span>
+          <strong id="modalWalletValue">Not set</strong>
+          <small>Used for Arc network analysis inside ArcLume.</small>
+        </article>
+        <article class="modal-stat">
+          <span>Email</span>
+          <strong id="modalEmailValue">Not set</strong>
+          <small>Optional identity prep for your Arc House session.</small>
+        </article>
+        <article class="modal-stat">
+          <span>Arc House private data</span>
+          <strong>Login required</strong>
+          <small>Points, badges, and personal contribution history.</small>
+        </article>
       </div>
 
       <div class="modal-actions">
-        <a class="btn btn-primary" href="https://community.arc.network/home" target="_blank" rel="noreferrer">Open Arc House</a>
-        <a class="btn btn-secondary" href="https://community.arc.network/public/contributors" target="_blank" rel="noreferrer">Open contributor area</a>
-        <a class="btn btn-secondary" href="https://community.arc.network/home/resources/architects-overview" target="_blank" rel="noreferrer">Architects overview</a>
-        <button class="btn btn-secondary" type="button" id="copyModalPrep">Copy prep summary</button>
+        <a class="btn btn-primary" href="https://community.arc.network/home" target="_blank" rel="noreferrer">Open Arc House sign in</a>
+        <button class="btn btn-secondary" type="button" id="modalCopyEmail">Copy email</button>
+        <button class="btn btn-secondary" type="button" id="modalCopySummary">Copy profile summary</button>
       </div>
 
-      <div class="modal-note">
-        Tip: after Arc House opens, use its visible sign-in flow. ArcLume does not impersonate Arc House authentication.
+      <div class="helper-note top-gap">
+        Useful follow-ups after sign-in: check your My Contributions panel, compare your tier progress against the Architect docs, and use the contribution rules to plan your next points.
       </div>
     </div>
   </div>

@@ -1,7 +1,8 @@
+
 import { ethers } from 'https://cdn.jsdelivr.net/npm/ethers@6.13.5/+esm';
 
 const CONFIG = {
-  appName: 'ArcLume',
+  appName: 'ArcLume V6',
   networkName: 'Arc Testnet',
   chainId: 5042002,
   rpcUrl: 'https://rpc.testnet.arc.network',
@@ -9,248 +10,118 @@ const CONFIG = {
   explorerApi: 'https://testnet.arcscan.app/api',
   communityUrl: 'https://community.arc.network/home',
   sampleAddress: '0x8004A818BFB912233c491871b3d84c89A494BD9e',
-  storageKey: 'arclume-v5-profile'
+  profileStorageKey: 'arclume_v6_profile',
+  buildTimestamp: '2026-04-04T12:00:00Z'
 };
 
-const COMMUNITY_DATA = {
-  events: [
-    {
-      title: 'ETHGlobal Cannes Hackathon',
-      icon: '⬡',
-      badge: 'Live now',
-      urgency: 'High',
-      urgencyTag: 'tag-danger',
-      iso: '2026-04-03T07:00:00Z',
-      meta: 'Apr 3 to Apr 5 · Cannes',
-      fit: 'Builders on the ground',
-      reason: 'Best for networking, booth visibility, and fast community exposure while the event is active.',
-      url: 'https://community.arc.network/home/events/ethglobal-pragma-l7dy3xfft9'
-    },
-    {
-      title: 'Arc Discord Office Hours',
-      icon: '◎',
-      badge: 'Soon',
-      urgency: 'Next step',
-      urgencyTag: 'tag-success',
-      iso: '2026-04-07T17:00:00Z',
-      meta: 'Apr 7 · 5:00 PM GMT',
-      fit: 'New builders',
-      reason: 'Low-friction way to ask questions, show up early, and start visible community participation.',
-      url: 'https://community.arc.network/'
-    },
-    {
-      title: 'Building Agentic Commerce on Arc: VibeCard',
-      icon: '✦',
-      badge: 'Builder spotlight',
-      urgency: 'Strategic',
-      urgencyTag: 'tag-primary',
-      iso: '2026-04-15T17:00:00Z',
-      meta: 'Apr 15 · 5:00 PM GMT',
-      fit: 'Product and AI builders',
-      reason: 'Strong signal if you want to understand where Arc is leaning on agentic commerce products.',
-      url: 'https://community.arc.network/'
-    },
-    {
-      title: 'Agentic Economy on Arc Hackathon',
-      icon: '⚡',
-      badge: '$10K prize pool',
-      urgency: 'Highest leverage',
-      urgencyTag: 'tag-warning',
-      iso: '2026-04-20T07:00:00Z',
-      meta: 'Apr 20 to Apr 26 · Hybrid',
-      fit: 'Serious teams',
-      reason: 'Biggest public builder opportunity on the current slate, with Circle nanopayments and Arc settlement as the core theme.',
-      url: 'https://community.arc.network/home/events/agentic-economy-on-arc-hackathon-xoayqenc6j'
-    }
-  ],
-  feed: [
-    {
-      type: 'Content',
-      title: 'Tradable joins the Arc Builders Fund',
-      icon: '▣',
-      badge: 'Latest',
-      meta: 'Blog · Apr 2, 2026',
-      description: 'Featured Arc House post on Tradable bringing institutional private credit workflows onto Arc Testnet.',
-      url: 'https://community.arc.network/home/blogs/tradable-joins-the-arc-builders-fund-institutional-private-credit-onchain-2026-04-02'
-    },
-    {
-      type: 'Content',
-      title: 'Replay: Building an Agentic Economy on Arc with RSoft Agentic Bank',
-      icon: '▶',
-      badge: 'Replay',
-      meta: 'Replay · Apr 1, 2026',
-      description: 'Replay covering KYA, agent reputation scoring, treasury management, and atomic settlement on Arc.',
-      url: 'https://community.arc.network/en/public/events/building-an-agentic-economy-on-arc-with-rsoft-agentic-bank-79o43gi2cn'
-    },
-    {
-      type: 'Content',
-      title: 'Agentic Economy on Arc Hackathon Kickoff Stream',
-      icon: '◉',
-      badge: 'Kickoff',
-      meta: 'Livestream recap',
-      description: 'Kickoff stream context for the hackathon and its agent-to-agent commerce direction.',
-      url: 'https://community.arc.network/en/public/events/nano-payments-arc-lablab-hackathon-kickoff'
-    },
-    {
-      type: 'Content',
-      title: 'Arc House home feed',
-      icon: '✧',
-      badge: 'Hub',
-      meta: 'Events, content, members',
-      description: 'Use Arc House itself to browse the full public event slate, content stream, and community navigation.',
-      url: 'https://community.arc.network/'
-    }
-  ],
-  resources: [
-    {
-      title: 'Architects: Program Overview',
-      icon: '◎',
-      description: 'Public overview of Arc’s ambassador-style Architects program.',
-      url: 'https://community.arc.network/home/resources/architects-overview'
-    },
-    {
-      title: 'Architects: Tiers & Benefits',
-      icon: '◌',
-      description: 'Public breakdown of tier thresholds, from Tier 0 at registration to later high-impact tiers.',
-      url: 'https://community.arc.network/home/resources/architects-tiers-and-benefits'
-    },
-    {
-      title: 'Architects: Roles',
-      icon: '⬡',
-      description: 'Public description of Architect roles like Community Moderator, Meetup Organizer, and Technical Speaker.',
-      url: 'https://community.arc.network/home/resources/architects-roles'
-    },
-    {
-      title: 'Contribution Rules',
-      icon: '✦',
-      description: 'Public rules for points and badges, including speaking, hosting, and event registration actions.',
-      url: 'https://community.arc.network/public/contributors/contribution-rules'
-    }
-  ],
-  timeline: [
-    {
-      title: 'Register on Arc House',
-      icon: '①',
-      badge: 'Tier 0',
-      description: 'Users who register for Arc House start at Tier 0.'
-    },
-    {
-      title: 'Show up in events and community',
-      icon: '②',
-      badge: 'Earn points',
-      description: 'Public contribution rules show points for actions like event speaking, hosting, and registration.'
-    },
-    {
-      title: 'Reach 500 points and opt in',
-      icon: '③',
-      badge: 'Tier 1',
-      description: 'Tier 1 Architect status begins at 500 points after opting in to the program.'
-    },
-    {
-      title: 'Unlock higher tiers and roles',
-      icon: '④',
-      badge: 'Roles',
-      description: 'Higher tiers open additional benefits and role eligibility such as Community Moderator and Meetup Organizer.'
-    }
-  ],
-  spotlight: [
-    {
-      title: 'Contributor stats stay gated',
-      description: 'Arc House publicly shows the leaderboard, but your own points and badges require sign-in.'
-    },
-    {
-      title: 'Agentic economy is a major theme',
-      description: 'Current public content and events heavily feature agentic commerce, agent banking, and nanopayment-based systems.'
-    },
-    {
-      title: 'Tier path is finally clearer',
-      description: 'The Architects docs now clearly spell out Tier 0 at registration and Tier 1 at 500 points with opt-in.'
-    }
-  ]
-};
+const COMMUNITY_ITEMS = [
+  {
+    id: 'launch-livestream',
+    title: 'Introducing Arc House and Architects Livestream',
+    type: 'event',
+    priority: 'high',
+    source: 'Arc House Home',
+    mode: 'Static public snapshot',
+    visibility: 'Public',
+    when: '2026-04-02T17:00:00Z',
+    icon: '▶',
+    summary: 'Arc House home currently spotlights the Arc House and Architects launch livestream as a primary public event entry.',
+    actionLabel: 'Open Arc House home',
+    url: 'https://community.arc.network/home'
+  },
+  {
+    id: 'tiers-benefits',
+    title: 'Architects: Tiers & Benefits',
+    type: 'tier',
+    priority: 'high',
+    source: 'Architect Docs',
+    mode: 'Static public snapshot',
+    visibility: 'Public',
+    when: '2026-03-31T00:00:00Z',
+    icon: '◎',
+    summary: 'Tier 0 starts at account registration, and Tier 1 begins at 500 points after opting into the program.',
+    actionLabel: 'Open tiers guide',
+    url: 'https://community.arc.network/public/resources/architects-tiers-and-benefits'
+  },
+  {
+    id: 'contribution-rules',
+    title: 'Contribution Rules',
+    type: 'points',
+    priority: 'high',
+    source: 'Contribution Rules',
+    mode: 'Static public snapshot',
+    visibility: 'Public',
+    when: '2026-03-31T00:00:00Z',
+    icon: '✦',
+    summary: 'Public rules show points for onboarding, daily active presence, event registration, event participation, content, and forum activity.',
+    actionLabel: 'Open contribution rules',
+    url: 'https://community.arc.network/public/contributors/contribution-rules'
+  },
+  {
+    id: 'leaderboard-signin',
+    title: 'Contributor Leaderboard and My Contributions',
+    type: 'signin',
+    priority: 'medium',
+    source: 'Contributors',
+    mode: 'Static public snapshot',
+    visibility: 'Public + sign-in',
+    when: '2026-04-04T00:00:00Z',
+    icon: '◌',
+    summary: 'The public contributor page exposes the leaderboard, while My Contributions requires sign in to reveal your points and badges.',
+    actionLabel: 'Open contributor board',
+    url: 'https://community.arc.network/public/contributors'
+  },
+  {
+    id: 'connect-arc',
+    title: 'Connect to Arc',
+    type: 'build',
+    priority: 'medium',
+    source: 'Arc Docs',
+    mode: 'Static public snapshot',
+    visibility: 'Public',
+    when: '2026-04-04T00:00:00Z',
+    icon: '⬡',
+    summary: 'Use the official network reference when connecting wallets or verifying Arc Testnet settings inside ArcLume.',
+    actionLabel: 'Open network docs',
+    url: 'https://docs.arc.network/arc/references/connect-to-arc'
+  }
+];
 
-const els = {
-  walletInput: document.getElementById('walletInput'),
-  emailInput: document.getElementById('emailInput'),
-  analyzeBtn: document.getElementById('analyzeBtn'),
-  profileForm: document.getElementById('profileForm'),
-  latestBlock: document.getElementById('latestBlock'),
-  networkBlock: document.getElementById('networkBlock'),
-  gasPrice: document.getElementById('gasPrice'),
-  lastRefresh: document.getElementById('lastRefresh'),
-  balanceValue: document.getElementById('balanceValue'),
-  txCountValue: document.getElementById('txCountValue'),
-  scoreValue: document.getElementById('scoreValue'),
-  walletTypeValue: document.getElementById('walletTypeValue'),
-  rpcStatusText: document.getElementById('rpcStatusText'),
-  loadingBar: document.getElementById('loadingBar'),
-  activityList: document.getElementById('activityList'),
-  activityNote: document.getElementById('activityNote'),
-  viewWalletTag: document.getElementById('viewWalletTag'),
-  liveModeTag: document.getElementById('liveModeTag'),
-  rpcEndpoint: document.getElementById('rpcEndpoint'),
-  useDemoAddress: document.getElementById('useDemoAddress'),
-  copySnapshot: document.getElementById('copySnapshot'),
-  quickWalletLink: document.getElementById('quickWalletLink'),
-  identityWallet: document.getElementById('identityWallet'),
-  identityEmail: document.getElementById('identityEmail'),
-  identityStatus: document.getElementById('identityStatus'),
-  identityProof: document.getElementById('identityProof'),
-  identityPoints: document.getElementById('identityPoints'),
-  identityTier: document.getElementById('identityTier'),
-  identityBadges: document.getElementById('identityBadges'),
-  identityEvents: document.getElementById('identityEvents'),
-  readinessScore: document.getElementById('readinessScore'),
-  communityModeValue: document.getElementById('communityModeValue'),
-  communityModeLabel: document.getElementById('communityModeLabel'),
-  identityNote: document.getElementById('identityNote'),
-  communityFeed: document.getElementById('communityFeed'),
-  communityTimeline: document.getElementById('communityTimeline'),
-  resourceGrid: document.getElementById('resourceGrid'),
-  spotlightPanel: document.getElementById('spotlightPanel'),
-  journeyGrid: document.getElementById('journeyGrid'),
-  journeyProgressFill: document.getElementById('journeyProgressFill'),
-  journeyPercent: document.getElementById('journeyPercent'),
-  journeySummary: document.getElementById('journeySummary'),
-  journeyStatusTag: document.getElementById('journeyStatusTag'),
-  eventGrid: document.getElementById('eventGrid'),
-  signInModal: document.getElementById('signInModal'),
-  closeModalBtn: document.getElementById('closeModalBtn'),
-  openSignInModal: document.getElementById('openSignInModal'),
-  openSignInModalInline: document.getElementById('openSignInModalInline'),
-  openSignInModalHero: document.getElementById('openSignInModalHero'),
-  modalWalletValue: document.getElementById('modalWalletValue'),
-  modalEmailValue: document.getElementById('modalEmailValue'),
-  modalReadinessValue: document.getElementById('modalReadinessValue'),
-  modalNextStepValue: document.getElementById('modalNextStepValue'),
-  copyModalPrep: document.getElementById('copyModalPrep')
-};
+const RESOURCE_ITEMS = [
+  { title: 'Arc House home', icon: '⌂', desc: 'Community home for events, content, discussions, and the sign-in entry.', url: 'https://community.arc.network/home' },
+  { title: 'Architects overview', icon: '◎', desc: 'High-level summary of the Architects program and why it exists.', url: 'https://community.arc.network/public/resources/architects-overview' },
+  { title: 'Architect tiers and benefits', icon: '◌', desc: 'Tier ladder, thresholds, benefits, and the 500 point opt-in milestone.', url: 'https://community.arc.network/public/resources/architects-tiers-and-benefits' },
+  { title: 'Contribution rules', icon: '✦', desc: 'Public point values for onboarding, daily active, event registration, attendance, content, and forum actions.', url: 'https://community.arc.network/public/contributors/contribution-rules' }
+];
 
-const provider = new ethers.JsonRpcProvider(CONFIG.rpcUrl, {
-  name: CONFIG.networkName,
-  chainId: CONFIG.chainId
-}, {
-  staticNetwork: true
-});
+const ACTIVITY_FILTERS = ['all', 'transfer', 'bridge', 'swap', 'liquidity', 'mint', 'contract call', 'deploy'];
+const COMMUNITY_FILTERS = [
+  { id: 'all', label: 'All priorities' },
+  { id: 'high', label: 'High priority' },
+  { id: 'event', label: 'Event' },
+  { id: 'tier', label: 'Tier' },
+  { id: 'points', label: 'Points' },
+  { id: 'signin', label: 'Sign-in' },
+  { id: 'build', label: 'Build' }
+];
 
-const activityIcons = {
-  swap: '⇄',
-  bridge: '⇢',
-  transfer: '◎',
-  contract: '◇',
-  stake: '◌',
-  mint: '✦',
-  deploy: '⬡',
-  default: '•'
-};
+const provider = new ethers.JsonRpcProvider(CONFIG.rpcUrl, { name: CONFIG.networkName, chainId: CONFIG.chainId }, { staticNetwork: true });
 
-let currentProfile = {
+const els = Object.fromEntries([...document.querySelectorAll('[id]')].map((node) => [node.id, node]));
+
+let state = {
   wallet: '',
   email: '',
-  balance: '--',
-  txCount: '--',
-  score: '--',
-  walletType: '--'
+  savedProfile: false,
+  activityFilter: 'all',
+  communityFilter: 'all',
+  transactions: [],
+  explorerHealthy: true,
+  summary: null
+};
+
+const activityIcons = {
+  swap: '⇄', bridge: '⇢', transfer: '◎', 'contract call': '◇', liquidity: '◌', mint: '✦', deploy: '⬡', default: '•'
 };
 
 function abbreviate(value, front = 6, back = 4) {
@@ -262,35 +133,43 @@ function abbreviate(value, front = 6, back = 4) {
 function formatCompact(value, digits = 2) {
   const num = Number(value);
   if (!Number.isFinite(num)) return '--';
-  return new Intl.NumberFormat('en-US', {
-    notation: 'compact',
-    maximumFractionDigits: digits
-  }).format(num);
+  return new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: digits }).format(num);
 }
 
 function formatUsdc(value) {
   const num = Number(value);
   if (!Number.isFinite(num)) return '--';
-  return new Intl.NumberFormat('en-US', {
-    minimumFractionDigits: num >= 1 ? 2 : 4,
-    maximumFractionDigits: num >= 1 ? 4 : 6
-  }).format(num);
+  return new Intl.NumberFormat('en-US', { minimumFractionDigits: num >= 1 ? 2 : 4, maximumFractionDigits: num >= 1 ? 4 : 6 }).format(num);
 }
 
-function relativeTime(input) {
-  if (!input) return 'Unknown';
-  const diff = Date.now() - new Date(input).getTime();
-  const minutes = Math.floor(diff / 60000);
-  if (minutes < 1) return 'just now';
-  if (minutes < 60) return `${minutes}m ago`;
-  const hours = Math.floor(minutes / 60);
+function formatDate(value, opts = { month: 'short', day: 'numeric', year: 'numeric' }) {
+  if (!value) return '--';
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return '--';
+  return d.toLocaleDateString([], opts);
+}
+
+function formatDateTime(value) {
+  if (!value) return '--';
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return '--';
+  return d.toLocaleString([], { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
+}
+
+function relativeTime(value) {
+  if (!value) return 'Unknown';
+  const diff = Date.now() - new Date(value).getTime();
+  const mins = Math.floor(diff / 60000);
+  if (mins < 1) return 'just now';
+  if (mins < 60) return `${mins}m ago`;
+  const hours = Math.floor(mins / 60);
   if (hours < 24) return `${hours}h ago`;
   const days = Math.floor(hours / 24);
   return `${days}d ago`;
 }
 
-function timeUntil(input) {
-  const diff = new Date(input).getTime() - Date.now();
+function timeUntil(value) {
+  const diff = new Date(value).getTime() - Date.now();
   const abs = Math.abs(diff);
   const days = Math.floor(abs / 86400000);
   const hours = Math.floor((abs % 86400000) / 3600000);
@@ -298,18 +177,235 @@ function timeUntil(input) {
   return days > 0 ? `${days}d ago` : `${hours}h ago`;
 }
 
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function showToast(message) {
+  els.toast.textContent = message;
+  els.toast.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => els.toast.classList.remove('show'), 2200);
+}
+
+function setBanner(type, text) {
+  if (!text) {
+    els.stateBanner.className = 'card glass banner-card hidden';
+    els.stateBanner.textContent = '';
+    return;
+  }
+  els.stateBanner.className = `card glass banner-card ${type || 'info'}`;
+  els.stateBanner.textContent = text;
+}
+
+function setLoading(isLoading) {
+  els.analyzeBtn.disabled = isLoading;
+  els.analyzeBtn.textContent = isLoading ? 'Loading...' : 'Analyze profile';
+  els.loadingBar.classList.toggle('active', isLoading);
+}
+
 function classifyTransaction(tx) {
-  const method = (tx.functionName || tx.method || '').toLowerCase();
+  const method = (tx.functionName || '').toLowerCase();
   const input = (tx.input || '').toLowerCase();
   const value = Number(tx.value || 0);
+  if (method.includes('swap')) return { type: 'swap', icon: activityIcons.swap, tag: 'tag-primary', label: 'Swap' };
+  if (method.includes('bridge') || method.includes('deposit') || method.includes('withdraw')) return { type: 'bridge', icon: activityIcons.bridge, tag: 'tag-accent', label: 'Bridge' };
+  if (method.includes('stake') || method.includes('unstake') || method.includes('liquidity')) return { type: 'liquidity', icon: activityIcons.liquidity, tag: 'tag-warning', label: 'Liquidity' };
+  if (method.includes('mint')) return { type: 'mint', icon: activityIcons.mint, tag: 'tag-success', label: 'Mint' };
+  if (!tx.to) return { type: 'deploy', icon: activityIcons.deploy, tag: 'tag-warning', label: 'Deploy' };
+  if (input === '0x' && value > 0) return { type: 'transfer', icon: activityIcons.transfer, tag: 'tag-success', label: 'Transfer' };
+  return { type: 'contract call', icon: activityIcons['contract call'], tag: 'tag-primary', label: 'Contract call' };
+}
 
-  if (method.includes('swap')) return { type: 'Swap', icon: activityIcons.swap, tag: 'tag-primary' };
-  if (method.includes('bridge') || method.includes('deposit') || method.includes('withdraw')) return { type: 'Bridge', icon: activityIcons.bridge, tag: 'tag-accent' };
-  if (method.includes('stake') || method.includes('unstake') || method.includes('liquidity')) return { type: 'Liquidity', icon: activityIcons.stake, tag: 'tag-warning' };
-  if (method.includes('mint')) return { type: 'Mint', icon: activityIcons.mint, tag: 'tag-success' };
-  if (!tx.to) return { type: 'Deploy', icon: activityIcons.deploy, tag: 'tag-warning' };
-  if (value > 0 || input === '0x') return { type: 'Transfer', icon: activityIcons.transfer, tag: 'tag-success' };
-  return { type: 'Contract call', icon: activityIcons.contract, tag: 'tag-primary' };
+function saveProfile() {
+  const payload = { wallet: state.wallet || els.walletInput.value.trim(), email: (state.email || els.emailInput.value.trim()).toLowerCase(), savedAt: new Date().toISOString() };
+  localStorage.setItem(CONFIG.profileStorageKey, JSON.stringify(payload));
+  state.savedProfile = true;
+  updateJourneyAndIdentity();
+  showToast('Profile mode saved locally');
+  setBanner('success', 'Saved profile mode locally. ArcLume will restore this wallet and email on your next visit.');
+}
+
+function clearProfile() {
+  localStorage.removeItem(CONFIG.profileStorageKey);
+  state.savedProfile = false;
+  state.wallet = '';
+  state.email = '';
+  state.transactions = [];
+  state.summary = null;
+  els.walletInput.value = '';
+  els.emailInput.value = '';
+  resetWalletViews();
+  updateJourneyAndIdentity();
+  showToast('Saved profile cleared');
+  setBanner('info', 'Saved profile cleared. You can enter a fresh wallet and email anytime.');
+}
+
+function loadSavedProfile() {
+  try {
+    const raw = localStorage.getItem(CONFIG.profileStorageKey);
+    if (!raw) return false;
+    const data = JSON.parse(raw);
+    if (data.wallet) { els.walletInput.value = data.wallet; state.wallet = data.wallet; }
+    if (data.email) { els.emailInput.value = data.email; state.email = data.email; }
+    state.savedProfile = Boolean(data.wallet || data.email);
+    return state.savedProfile;
+  } catch {
+    return false;
+  }
+}
+
+function buildShareUrl() {
+  const url = new URL(window.location.href);
+  const wallet = els.walletInput.value.trim();
+  const email = els.emailInput.value.trim();
+  wallet ? url.searchParams.set('address', wallet) : url.searchParams.delete('address');
+  email ? url.searchParams.set('email', email) : url.searchParams.delete('email');
+  return url.toString();
+}
+
+async function copyText(text, success = 'Copied') {
+  if (!text) return;
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast(success);
+  } catch {
+    window.prompt('Copy this value:', text);
+  }
+}
+
+function computeReadiness() {
+  const walletValid = ethers.isAddress(els.walletInput.value.trim());
+  const email = els.emailInput.value.trim();
+  const emailValid = email ? isValidEmail(email) : false;
+  const saved = state.savedProfile;
+  const score = (walletValid ? 40 : 0) + (emailValid ? 25 : 0) + (saved ? 15 : 0) + ((walletValid && emailValid) ? 20 : 0);
+  let badge = 'Awaiting setup';
+  if (score >= 90) badge = 'Arc House ready';
+  else if (score >= 60) badge = 'Profile prepared';
+  else if (score >= 40) badge = 'Wallet ready';
+  return { score, badge, walletValid, emailValid };
+}
+
+function getJourneySteps() {
+  const readiness = computeReadiness();
+  return [
+    { title: 'Wallet connected', desc: 'A valid Arc wallet is present for onchain analysis.', done: readiness.walletValid, icon: '⌁' },
+    { title: 'Email added', desc: 'An email is present for Arc House profile prep.', done: readiness.emailValid, icon: '@' },
+    { title: 'Profile saved', desc: 'Wallet and email are stored locally for quick return.', done: state.savedProfile, icon: '◌' },
+    { title: 'Arc House handoff ready', desc: 'Use the access panel to continue into Arc House sign-in.', done: readiness.walletValid && readiness.emailValid, icon: '↗' }
+  ];
+}
+
+function updateJourneyAndIdentity() {
+  const wallet = els.walletInput.value.trim();
+  const email = els.emailInput.value.trim().toLowerCase();
+  state.wallet = wallet;
+  state.email = email;
+  const { score, badge, walletValid, emailValid } = computeReadiness();
+  const journey = getJourneySteps();
+  const completed = journey.filter(step => step.done).length;
+
+  els.readinessScore.textContent = `${score}%`;
+  els.readinessBadgeValue.textContent = badge;
+  els.communityModeValue.textContent = walletValid && emailValid ? 'Profile prepared' : walletValid ? 'Wallet mode' : 'Awaiting input';
+  els.communityModeLabel.textContent = walletValid && emailValid ? 'Profile prepared' : walletValid ? 'Wallet mode' : 'Awaiting input';
+  els.identityWallet.textContent = wallet ? abbreviate(wallet, 8, 6) : 'Not checked yet';
+  els.identityEmail.textContent = email || 'Optional';
+  els.identityStatus.textContent = walletValid && emailValid ? 'Ready for Arc House handoff' : walletValid ? 'Wallet analyzed only' : 'Ready for wallet or sign-in';
+  els.identityProof.textContent = emailValid ? 'Email format ready' : 'Not verified';
+  els.nextActionText.textContent = walletValid && emailValid
+    ? 'Your wallet and email are ready. Use the Arc House access panel to continue into sign-in and then review your My Contributions area.'
+    : walletValid
+      ? 'Your wallet is ready. Add your Arc House email to complete the profile preparation step.'
+      : 'Start with a valid wallet, then add your Arc House email if you want a cleaner sign-in handoff.';
+  els.walletBadgeTag.textContent = badge;
+  els.journeyTag.textContent = `Step ${completed}`;
+  els.identityNote.textContent = walletValid && emailValid
+    ? 'ArcLume profile mode is prepared. Personal Arc House stats still remain sign-in-only until Arc exposes a supported authenticated integration.'
+    : 'Add both wallet and email to unlock the fuller ArcLume profile mode. Personal Arc House stats still remain sign-in-only unless Arc provides an authenticated integration later.';
+
+  els.journeyGrid.innerHTML = journey.map((step, idx) => `
+    <article class="journey-card">
+      <div class="journey-icon">${step.icon}</div>
+      <div class="journey-main">
+        <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start; flex-wrap:wrap;">
+          <h4>${idx + 1}. ${step.title}</h4>
+          <span class="tag ${step.done ? 'tag-success' : 'tag-muted'}">${step.done ? 'Done' : 'Pending'}</span>
+        </div>
+        <p>${step.desc}</p>
+      </div>
+    </article>
+  `).join('');
+
+  els.modalWalletValue.textContent = wallet ? abbreviate(wallet, 8, 6) : 'Not set';
+  els.modalEmailValue.textContent = email || 'Not set';
+}
+
+function resetWalletViews() {
+  els.balanceValue.textContent = '--';
+  els.txCountValue.textContent = '--';
+  els.scoreValue.textContent = '--';
+  els.walletTypeValue.textContent = '--';
+  els.firstSeenValue.textContent = '--';
+  els.streakValue.textContent = '--';
+  els.diversityValue.textContent = '--';
+  els.contractDepthValue.textContent = '--';
+  els.recentActivityValue.textContent = '--';
+  els.readinessBadgeValue.textContent = computeReadiness().badge;
+  els.activityList.innerHTML = '<div class="empty">No wallet checked yet. Paste an address above to load live data.</div>';
+  els.activityNote.classList.add('hidden');
+  els.viewWalletTag.href = CONFIG.explorerUrl;
+  els.quickWalletLink && (els.quickWalletLink.href = CONFIG.explorerUrl);
+}
+
+async function refreshNetworkPanel() {
+  try {
+    const [network, blockNumber, feeData] = await Promise.all([
+      provider.getNetwork(), provider.getBlockNumber(), provider.getFeeData()
+    ]);
+    els.latestBlock.textContent = formatCompact(blockNumber, 1);
+    els.networkBlock.textContent = formatCompact(blockNumber, 1);
+    els.rpcStatusText.textContent = `${network.name || CONFIG.networkName} online`;
+    els.gasPrice.textContent = feeData.gasPrice ? `${ethers.formatUnits(feeData.gasPrice, 'gwei')} gwei` : 'Unavailable';
+    els.lastRefresh.textContent = new Date().toLocaleTimeString();
+  } catch (error) {
+    els.rpcStatusText.textContent = 'Arc RPC unavailable';
+    els.latestBlock.textContent = '--';
+    els.networkBlock.textContent = '--';
+    els.gasPrice.textContent = 'Unavailable';
+    setBanner('warning', 'Arc RPC is unavailable right now. Wallet checks may fail until the network endpoint responds again.');
+  }
+}
+
+async function fetchTransactionList(address, sort = 'desc', offset = 25) {
+  const url = `${CONFIG.explorerApi}?module=account&action=txlist&address=${address}&sort=${sort}&page=1&offset=${offset}`;
+  const response = await fetch(url, { headers: { Accept: 'application/json' } });
+  if (!response.ok) throw new Error(`Explorer request failed with status ${response.status}`);
+  const data = await response.json();
+  if (!data || !Array.isArray(data.result)) return [];
+  return data.result;
+}
+
+function computeStreak(transactions) {
+  if (!transactions.length) return 0;
+  const daySet = new Set(transactions.map(tx => new Date(Number(tx.timeStamp) * 1000).toISOString().slice(0, 10)));
+  let streak = 0;
+  let cursor = new Date();
+  while (true) {
+    const key = cursor.toISOString().slice(0, 10);
+    if (!daySet.has(key)) break;
+    streak += 1;
+    cursor.setUTCDate(cursor.getUTCDate() - 1);
+  }
+  return streak;
+}
+
+function getWalletBadge(txCount, recentCount, diversity, contractDepth) {
+  if (txCount === 0) return 'Fresh wallet';
+  if (txCount < 8 || recentCount < 3) return 'Warming wallet';
+  if (txCount >= 8 && recentCount >= 3 && diversity >= 3) return contractDepth >= 5 ? 'Active builder' : 'Active wallet';
+  return 'Fresh wallet';
 }
 
 function computeScore({ balance, txCount, recentCount, uniqueTargets, isContract }) {
@@ -321,320 +417,114 @@ function computeScore({ balance, txCount, recentCount, uniqueTargets, isContract
   return balanceScore + txScore + recentScore + diversityScore + contractPenalty;
 }
 
-function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
-}
-
-function calculateReadiness(wallet, email) {
-  let score = 0;
-  if (ethers.isAddress(wallet)) score += 60;
-  if (isValidEmail(email)) score += 40;
-  return score;
-}
-
-function communityModeLabel(wallet, email) {
-  const hasWallet = ethers.isAddress(wallet);
-  const hasEmail = isValidEmail(email);
-  if (hasWallet && hasEmail) return 'Wallet + email';
-  if (hasWallet) return 'Wallet only';
-  if (hasEmail) return 'Email only';
-  return 'Awaiting input';
-}
-
-function nextStepLabel(wallet, email) {
-  const hasWallet = ethers.isAddress(wallet);
-  const hasEmail = isValidEmail(email);
-  if (!hasWallet && !hasEmail) return 'Add wallet and email';
-  if (hasWallet && !hasEmail) return 'Add email for Arc House handoff';
-  if (!hasWallet && hasEmail) return 'Add wallet for Arc intelligence';
-  return 'Open Arc House and sign in';
-}
-
-function loadSavedProfile() {
-  const saved = localStorage.getItem(CONFIG.storageKey);
-  if (!saved) return;
-  try {
-    const parsed = JSON.parse(saved);
-    if (parsed.wallet) els.walletInput.value = parsed.wallet;
-    if (parsed.email) els.emailInput.value = parsed.email;
-  } catch {}
-}
-
-function persistProfile() {
-  const payload = {
-    wallet: els.walletInput.value.trim(),
-    email: els.emailInput.value.trim()
-  };
-  localStorage.setItem(CONFIG.storageKey, JSON.stringify(payload));
-}
-
-function updateIdentity(wallet = '', email = '') {
-  const readiness = calculateReadiness(wallet, email);
-  const mode = communityModeLabel(wallet, email);
-
-  els.identityWallet.textContent = ethers.isAddress(wallet) ? abbreviate(wallet, 8, 6) : 'No valid wallet yet';
-  els.identityEmail.textContent = isValidEmail(email) ? email : 'Optional';
-  els.identityStatus.textContent = isValidEmail(email) ? 'Ready to continue to Arc House sign-in' : 'Add email or continue with wallet only';
-  els.identityProof.textContent = isValidEmail(email) ? 'Prepared locally in ArcLume' : 'Not verified';
-  els.identityPoints.textContent = 'Login required';
-  els.identityTier.textContent = 'Login required';
-  els.identityBadges.textContent = 'Login required';
-  els.identityEvents.textContent = 'Login required';
-  els.readinessScore.textContent = `${readiness}%`;
-  els.communityModeValue.textContent = mode;
-  els.communityModeLabel.textContent = mode;
-  els.identityNote.textContent = isValidEmail(email)
-    ? 'Your email is ready inside ArcLume. Continue to Arc House sign-in when you want private community details like points, badges, and event history.'
-    : 'Add an email for a smoother Arc House handoff. Private community details still require Arc House sign-in.';
-
-  updateJourney(wallet, email);
-  updateModalSummary(wallet, email);
-}
-
-function updateJourney(wallet = '', email = '') {
-  const hasWallet = ethers.isAddress(wallet);
-  const hasEmail = isValidEmail(email);
-  const readiness = calculateReadiness(wallet, email);
-
-  const steps = [
-    {
-      title: 'Connect your Arc wallet input',
-      description: 'Enter a valid Arc-compatible wallet so ArcLume can load live balance, nonce, type, and activity.',
-      done: hasWallet,
-      action: hasWallet ? 'Done' : 'Needed now'
-    },
-    {
-      title: 'Add your Arc House email',
-      description: 'Email makes the Arc House handoff cleaner and gives ArcLume a stronger profile mode.',
-      done: hasEmail,
-      action: hasEmail ? 'Done' : 'Recommended'
-    },
-    {
-      title: 'Open Arc House and sign in',
-      description: 'Use Arc House for personal points, badges, contribution history, and login-gated profile details.',
-      done: hasWallet && hasEmail,
-      action: hasWallet && hasEmail ? 'Ready now' : 'Prepare first'
-    },
-    {
-      title: 'Work toward Tier 1 Architect',
-      description: 'The public Architect docs show Tier 1 starts at 500 points after opting in.',
-      done: false,
-      action: 'Future step'
-    }
-  ];
-
-  els.journeyGrid.innerHTML = steps.map((step, index) => `
-    <article class="journey-step ${step.done ? 'done' : 'pending'}">
-      <div class="step-top">
-        <div class="step-index">${index + 1}</div>
-        <span class="tag ${step.done ? 'tag-success' : 'tag-muted'}">${step.action}</span>
-      </div>
-      <h4>${step.title}</h4>
-      <p>${step.description}</p>
-    </article>
+function renderActivityFilters() {
+  els.activityFilters.innerHTML = ACTIVITY_FILTERS.map(filter => `
+    <button class="filter-chip ${state.activityFilter === filter ? 'active' : ''}" data-activity-filter="${filter}" type="button">${filter === 'all' ? 'All activity' : filter}</button>
   `).join('');
-
-  els.journeyProgressFill.style.width = `${readiness}%`;
-  els.journeyPercent.textContent = `${readiness}%`;
-  els.journeySummary.textContent = nextStepLabel(wallet, email);
-  els.journeyStatusTag.textContent = readiness >= 100 ? 'Ready for Arc House' : readiness >= 60 ? 'Almost ready' : 'Start here';
 }
 
-async function refreshNetworkPanel() {
-  try {
-    const [network, blockNumber, feeData] = await Promise.all([
-      provider.getNetwork(),
-      provider.getBlockNumber(),
-      provider.getFeeData()
-    ]);
-
-    els.latestBlock.textContent = formatCompact(blockNumber, 1);
-    els.networkBlock.textContent = formatCompact(blockNumber, 1);
-    els.rpcStatusText.textContent = `${network.name || CONFIG.networkName} online`;
-    els.gasPrice.textContent = feeData.gasPrice ? `${ethers.formatUnits(feeData.gasPrice, 'gwei')} gwei` : 'Unavailable';
-    els.lastRefresh.textContent = new Date().toLocaleTimeString();
-  } catch {
-    els.rpcStatusText.textContent = 'Arc RPC unavailable';
-    els.latestBlock.textContent = '--';
-    els.networkBlock.textContent = '--';
-    els.gasPrice.textContent = 'Unavailable';
-  }
-}
-
-async function fetchExplorerTransactions(address) {
-  const url = `${CONFIG.explorerApi}?module=account&action=txlist&address=${address}&sort=desc&page=1&offset=10`;
-  const response = await fetch(url, {
-    method: 'GET',
-    headers: { 'Accept': 'application/json' }
-  });
-
-  if (!response.ok) throw new Error(`Explorer request failed with status ${response.status}`);
-
-  const data = await response.json();
-  if (!data || !Array.isArray(data.result)) return [];
-  return data.result;
-}
-
-function setLoading(isLoading) {
-  els.analyzeBtn.disabled = isLoading;
-  els.analyzeBtn.textContent = isLoading ? 'Loading...' : 'Analyze profile';
-  els.loadingBar.classList.toggle('active', isLoading);
-}
-
-function renderActivities(transactions, note = '') {
-  els.activityNote.style.display = note ? 'block' : 'none';
-  els.activityNote.textContent = note;
-
-  if (!transactions.length) {
-    els.activityList.innerHTML = '<div class="empty">No recent explorer activity was loaded for this wallet in this browser session.</div>';
+function renderActivities(note = '') {
+  els.activityNote.textContent = note || '';
+  els.activityNote.classList.toggle('hidden', !note);
+  if (!state.transactions.length) {
+    els.activityList.innerHTML = '<div class="empty">No recent wallet activity was available in this session. If the wallet is new, that may be expected. If the explorer is limiting browser calls, retry later or open Arcscan directly.</div>';
     return;
   }
-
-  els.activityList.innerHTML = transactions.map((tx) => {
-    const details = classifyTransaction(tx);
-    const ts = tx.timeStamp ? new Date(Number(tx.timeStamp) * 1000).toISOString() : null;
+  const filtered = state.transactions.filter(tx => state.activityFilter === 'all' || tx.__details.type === state.activityFilter);
+  if (!filtered.length) {
+    els.activityList.innerHTML = `<div class="empty">No transactions matched the <strong>${state.activityFilter}</strong> filter for this wallet.</div>`;
+    return;
+  }
+  els.activityList.innerHTML = filtered.map(tx => {
+    const d = tx.__details;
+    const ts = new Date(Number(tx.timeStamp) * 1000).toISOString();
     const amount = Number(tx.value || 0) > 0 ? `${formatUsdc(Number(ethers.formatUnits(tx.value || '0', 18)))} USDC` : 'Interaction';
-    const methodLabel = tx.functionName && tx.functionName !== '0x' ? tx.functionName : details.type;
-
+    const label = tx.functionName && tx.functionName !== '0x' ? tx.functionName : d.label;
     return `
       <article class="activity-item">
-        <div class="activity-icon">${details.icon}</div>
+        <div class="activity-icon">${d.icon}</div>
         <div class="activity-main">
-          <h4>${methodLabel}</h4>
-          <p>${abbreviate(tx.hash, 10, 8)} • ${ts ? relativeTime(ts) : 'Unknown time'} • ${amount}</p>
+          <h4>${label}</h4>
+          <p>${abbreviate(tx.hash, 10, 8)} • ${relativeTime(ts)} • ${amount}</p>
         </div>
         <div class="activity-meta">
-          <span class="tag ${details.tag}">${details.type}</span>
-          <a href="${CONFIG.explorerUrl}/tx/${tx.hash}" target="_blank" rel="noreferrer" class="text-link">View tx ↗</a>
+          <span class="tag ${d.tag}">${d.label}</span>
+          <a class="text-link" href="${CONFIG.explorerUrl}/tx/${tx.hash}" target="_blank" rel="noreferrer">View tx ↗</a>
         </div>
-      </article>
-    `;
+      </article>`;
   }).join('');
 }
 
 function renderCommunity() {
-  els.eventGrid.innerHTML = COMMUNITY_DATA.events.map((item) => `
-    <article class="event-card">
-      <div class="event-icon">${item.icon}</div>
-      <div class="event-main">
-        <div class="event-top">
-          <h4>${item.title}</h4>
-          <span class="tag ${item.urgencyTag}">${item.urgency}</span>
-        </div>
-        <p>${item.reason}</p>
-        <div class="event-keyline">
-          <span class="tag tag-primary">${item.badge}</span>
-          <span class="tag tag-muted">${item.meta}</span>
-          <span class="tag tag-muted">${timeUntil(item.iso)}</span>
-        </div>
-        <div class="event-detail"><strong>Best for:</strong> ${item.fit}</div>
-        <div class="event-links">
-          <a class="text-link" href="${item.url}" target="_blank" rel="noreferrer">Open event ↗</a>
-        </div>
-      </div>
-    </article>
-  `).join('');
-
-  els.communityFeed.innerHTML = COMMUNITY_DATA.feed.map((item) => `
+  els.communityBuildTime.textContent = formatDateTime(CONFIG.buildTimestamp);
+  els.communityRefreshTime.textContent = new Date().toLocaleTimeString();
+  const items = COMMUNITY_ITEMS.filter(item => state.communityFilter === 'all' || item.priority === state.communityFilter || item.type === state.communityFilter);
+  els.communityFeed.innerHTML = items.map(item => `
     <article class="community-card">
       <div class="community-icon">${item.icon}</div>
       <div class="community-main">
         <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start; flex-wrap:wrap;">
           <h4>${item.title}</h4>
-          <span class="tag ${item.type === 'Content' ? 'tag-accent' : 'tag-primary'}">${item.badge}</span>
+          <span class="tag ${item.priority === 'high' ? 'tag-warning' : 'tag-primary'}">${item.priority} priority</span>
         </div>
-        <p>${item.description}</p>
+        <p>${item.summary}</p>
         <div class="community-links">
-          <span class="tag tag-muted">${item.meta}</span>
-          <a class="text-link" href="${item.url}" target="_blank" rel="noreferrer">Open ↗</a>
+          <span class="tag tag-muted">${item.source}</span>
+          <span class="tag tag-muted">${item.mode}</span>
+          <span class="tag tag-muted">${item.visibility}</span>
+          <span class="tag tag-muted">${timeUntil(item.when)}</span>
+          <a class="text-link" href="${item.url}" target="_blank" rel="noreferrer">${item.actionLabel} ↗</a>
         </div>
       </div>
     </article>
   `).join('');
 
-  els.communityTimeline.innerHTML = COMMUNITY_DATA.timeline.map((item) => `
-    <article class="timeline-item">
-      <div class="timeline-icon">${item.icon}</div>
-      <div class="timeline-main">
-        <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start; flex-wrap:wrap;">
-          <h4>${item.title}</h4>
-          <span class="tag tag-success">${item.badge}</span>
-        </div>
-        <p>${item.description}</p>
-      </div>
-    </article>
-  `).join('');
-
-  els.resourceGrid.innerHTML = COMMUNITY_DATA.resources.map((item) => `
+  els.resourceGrid.innerHTML = RESOURCE_ITEMS.map(item => `
     <article class="resource-card">
       <div class="resource-icon">${item.icon}</div>
       <div class="resource-main">
         <h4>${item.title}</h4>
-        <p>${item.description}</p>
-        <div class="resource-links">
-          <a class="text-link" href="${item.url}" target="_blank" rel="noreferrer">Open resource ↗</a>
-        </div>
+        <p>${item.desc}</p>
+        <div class="resource-links"><a class="text-link" href="${item.url}" target="_blank" rel="noreferrer">Open resource ↗</a></div>
       </div>
     </article>
   `).join('');
+}
 
-  els.spotlightPanel.innerHTML = COMMUNITY_DATA.spotlight.map((item) => `
-    <article class="spotlight-card">
-      <h4>${item.title}</h4>
-      <p>${item.description}</p>
-    </article>
+function renderCommunityFilters() {
+  els.communityFilters.innerHTML = COMMUNITY_FILTERS.map(filter => `
+    <button class="filter-chip ${state.communityFilter === filter.id ? 'active' : ''}" data-community-filter="${filter.id}" type="button">${filter.label}</button>
   `).join('');
 }
 
-function updateModalSummary(wallet = '', email = '') {
-  const readiness = calculateReadiness(wallet, email);
-  els.modalWalletValue.textContent = ethers.isAddress(wallet) ? abbreviate(wallet, 8, 6) : 'Not set';
-  els.modalEmailValue.textContent = isValidEmail(email) ? email : 'Not set';
-  els.modalReadinessValue.textContent = `${readiness}%`;
-  els.modalNextStepValue.textContent = nextStepLabel(wallet, email);
+function setWalletInsightDefaults() {
+  els.firstSeenValue.textContent = '--';
+  els.streakValue.textContent = '--';
+  els.diversityValue.textContent = '--';
+  els.contractDepthValue.textContent = '--';
+  els.recentActivityValue.textContent = '--';
+  els.walletBadgeTag.textContent = 'Fresh wallet';
 }
 
-function openModal() {
-  updateModalSummary(els.walletInput.value.trim(), els.emailInput.value.trim());
-  els.signInModal.classList.add('is-open');
-  els.signInModal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-  els.signInModal.classList.remove('is-open');
-  els.signInModal.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-}
-
-function resetProfileUI(wallet = '', email = '') {
-  updateIdentity(wallet, email);
-  currentProfile = { wallet, email, balance: '--', txCount: '--', score: '--', walletType: '--' };
-}
-
-async function analyzeProfile(wallet, email) {
-  updateIdentity(wallet, email);
-  persistProfile();
-
-  if (!ethers.isAddress(wallet)) {
-    els.balanceValue.textContent = '--';
-    els.txCountValue.textContent = '--';
-    els.scoreValue.textContent = '--';
-    els.walletTypeValue.textContent = '--';
-    els.activityNote.style.display = 'block';
-    els.activityNote.textContent = 'Enter a valid wallet address to load live Arc data. Email alone powers profile mode, not onchain metrics.';
-    els.activityList.innerHTML = '<div class="empty">Wallet lookup is waiting for a valid Arc-compatible address.</div>';
-    currentProfile = { wallet, email, balance: '--', txCount: '--', score: '--', walletType: '--' };
+async function analyzeWallet(wallet, email) {
+  if (!wallet || !ethers.isAddress(wallet)) {
+    setBanner('error', 'Enter a valid wallet address before running the profile analysis.');
+    showToast('Wallet address invalid');
+    return;
+  }
+  if (email && !isValidEmail(email)) {
+    setBanner('warning', 'The email format looks invalid. Fix it first, or leave it blank and continue with wallet-only mode.');
+    showToast('Email format looks invalid');
     return;
   }
 
+  state.wallet = wallet;
+  state.email = email.toLowerCase();
+  updateJourneyAndIdentity();
   setLoading(true);
-  const walletUrl = `${CONFIG.explorerUrl}/address/${wallet}`;
-  els.viewWalletTag.href = walletUrl;
-  els.viewWalletTag.textContent = 'Open in Arcscan';
-  els.quickWalletLink.href = walletUrl;
-  els.activityList.innerHTML = '<div class="empty">Loading recent activity…</div>';
-  els.activityNote.style.display = 'none';
+  setBanner('info', 'Running live Arc wallet analysis. Explorer-derived insights may be limited if browser access to Arcscan is unavailable.');
+  els.viewWalletTag.href = `${CONFIG.explorerUrl}/address/${wallet}`;
+  if (els.quickWalletLink) els.quickWalletLink.href = `${CONFIG.explorerUrl}/address/${wallet}`;
 
   try {
     const [balanceBn, txCount, code, latestBlock] = await Promise.all([
@@ -646,153 +536,190 @@ async function analyzeProfile(wallet, email) {
 
     const balance = Number(ethers.formatUnits(balanceBn, 18));
     const isContract = code && code !== '0x';
-
     els.balanceValue.textContent = `${formatUsdc(balance)} USDC`;
     els.txCountValue.textContent = formatCompact(txCount, 0);
     els.walletTypeValue.textContent = isContract ? 'Contract' : 'EOA';
     els.latestBlock.textContent = formatCompact(latestBlock, 1);
     els.networkBlock.textContent = formatCompact(latestBlock, 1);
-    els.liveModeTag.textContent = 'Live mode';
+    els.liveModeTag.textContent = 'RPC live';
 
-    let explorerTransactions = [];
-    let explorerNote = isValidEmail(email)
-      ? 'Wallet data is live. Your email is prepared locally inside ArcLume, and Arc House sign-in remains the next step for private profile fields.'
-      : 'Wallet data is live. Add an email for a smoother Arc House handoff. Private profile fields remain login-gated there.';
-
+    let recentTxs = [];
+    let oldestTx = null;
+    let note = '';
+    state.explorerHealthy = true;
     try {
-      explorerTransactions = await fetchExplorerTransactions(wallet);
-      if (!explorerTransactions.length) {
-        explorerNote = 'Explorer reached, but no recent transactions were returned for this wallet. Arc House private profile fields still remain behind sign-in.';
-      }
-    } catch {
-      explorerNote = 'Recent activity feed could not be loaded from the explorer in this browser session. Live balance and wallet metrics are still real. Arc House private profile fields still remain behind sign-in.';
+      const [recentList, firstList] = await Promise.all([
+        fetchTransactionList(wallet, 'desc', 25),
+        fetchTransactionList(wallet, 'asc', 1)
+      ]);
+      recentTxs = recentList.map(tx => ({ ...tx, __details: classifyTransaction(tx) }));
+      oldestTx = firstList[0] || null;
+      if (!recentTxs.length) note = 'No recent explorer transactions were returned for this wallet. The wallet may be new, inactive, or temporarily limited by explorer indexing.';
+    } catch (error) {
+      state.explorerHealthy = false;
       els.liveModeTag.textContent = 'RPC live, explorer limited';
+      note = 'Arcscan activity could not be loaded in this browser session. Live wallet balance and nonce are still real.';
     }
 
-    const uniqueTargets = new Set(explorerTransactions.map(tx => tx.to).filter(Boolean)).size;
-    const score = computeScore({
-      balance,
-      txCount,
-      recentCount: explorerTransactions.length,
-      uniqueTargets,
-      isContract
-    });
+    state.transactions = recentTxs;
+    const uniqueTargets = new Set(recentTxs.map(tx => tx.to).filter(Boolean)).size;
+    const contractDepth = recentTxs.filter(tx => tx.__details.type !== 'transfer').length;
+    const streak = computeStreak(recentTxs);
+    const score = computeScore({ balance, txCount, recentCount: recentTxs.length, uniqueTargets, isContract });
+    const badge = getWalletBadge(txCount, recentTxs.length, uniqueTargets, contractDepth);
 
     els.scoreValue.textContent = formatCompact(score, 0);
-    renderActivities(explorerTransactions, explorerNote);
-    els.lastRefresh.textContent = new Date().toLocaleTimeString();
+    els.firstSeenValue.textContent = oldestTx ? formatDate(Number(oldestTx.timeStamp) * 1000) : state.explorerHealthy ? 'No history' : 'Unavailable';
+    els.streakValue.textContent = state.explorerHealthy ? `${streak}d` : 'Unavailable';
+    els.diversityValue.textContent = state.explorerHealthy ? formatCompact(uniqueTargets, 0) : 'Unavailable';
+    els.contractDepthValue.textContent = state.explorerHealthy ? formatCompact(contractDepth, 0) : 'Unavailable';
+    els.recentActivityValue.textContent = state.explorerHealthy ? formatCompact(recentTxs.length, 0) : 'Unavailable';
+    els.walletBadgeTag.textContent = badge;
 
-    currentProfile = {
+    renderActivities(note);
+    updateJourneyAndIdentity();
+    state.summary = {
       wallet,
-      email,
-      balance: `${formatUsdc(balance)} USDC`,
-      txCount: formatCompact(txCount, 0),
-      score: formatCompact(score, 0),
-      walletType: isContract ? 'Contract' : 'EOA'
+      email: state.email,
+      balance: els.balanceValue.textContent,
+      txCount: els.txCountValue.textContent,
+      score: els.scoreValue.textContent,
+      walletType: els.walletTypeValue.textContent,
+      firstSeen: els.firstSeenValue.textContent,
+      streak: els.streakValue.textContent,
+      diversity: els.diversityValue.textContent,
+      badge
     };
-    updateModalSummary(wallet, email);
+
+    if (email) {
+      setBanner('success', 'Wallet analysis complete. Your wallet and email are now prepared for the Arc House handoff panel.');
+    } else {
+      setBanner('info', 'Wallet analysis complete. Add your Arc House email if you want a stronger sign-in handoff and saved profile mode.');
+    }
   } catch (error) {
     console.error(error);
-    els.balanceValue.textContent = '--';
-    els.txCountValue.textContent = '--';
-    els.scoreValue.textContent = '--';
-    els.walletTypeValue.textContent = '--';
-    els.activityNote.style.display = 'block';
-    els.activityNote.textContent = 'Unable to load wallet data right now. Check the address format, then retry.';
-    els.activityList.innerHTML = '<div class="empty">Wallet lookup failed. Try again in a moment.</div>';
-    currentProfile = { wallet, email, balance: '--', txCount: '--', score: '--', walletType: '--' };
+    resetWalletViews();
+    setWalletInsightDefaults();
+    els.liveModeTag.textContent = 'Wallet lookup failed';
+    setBanner('error', 'Wallet lookup failed. Check the address format, then retry. If Arc RPC is under load, wait and try again.');
+    showToast('Wallet lookup failed');
   } finally {
     setLoading(false);
   }
 }
 
-async function copyText(text, buttonEl, doneText, revertText) {
-  try {
-    await navigator.clipboard.writeText(text);
-    if (buttonEl) {
-      const previous = buttonEl.textContent;
-      buttonEl.textContent = doneText;
-      setTimeout(() => { buttonEl.textContent = revertText || previous; }, 1500);
-    }
-  } catch {
-    alert(text);
-  }
+function openModal() {
+  els.signInModal.classList.remove('hidden');
+  els.signInModal.setAttribute('aria-hidden', 'false');
+}
+
+function closeModal() {
+  els.signInModal.classList.add('hidden');
+  els.signInModal.setAttribute('aria-hidden', 'true');
 }
 
 function buildSnapshotText() {
+  const s = state.summary || {
+    wallet: els.walletInput.value.trim() || 'Not set',
+    email: els.emailInput.value.trim() || 'Not set',
+    balance: els.balanceValue.textContent,
+    txCount: els.txCountValue.textContent,
+    score: els.scoreValue.textContent,
+    walletType: els.walletTypeValue.textContent,
+    firstSeen: els.firstSeenValue.textContent,
+    streak: els.streakValue.textContent,
+    diversity: els.diversityValue.textContent,
+    badge: els.walletBadgeTag.textContent
+  };
   return [
-    'ArcLume V5 Snapshot',
-    `Wallet: ${currentProfile.wallet || 'Not set'}`,
-    `Email: ${currentProfile.email || 'Not set'}`,
-    `Balance: ${currentProfile.balance}`,
-    `Tx Count: ${currentProfile.txCount}`,
-    `Arc Score: ${currentProfile.score}`,
-    `Wallet Type: ${currentProfile.walletType}`,
-    'Arc House private stats: Login required',
-    `Next step: ${nextStepLabel(currentProfile.wallet || '', currentProfile.email || '')}`
-  ].join('\n');
+    'ArcLume V6 snapshot',
+    `Wallet: ${s.wallet}`,
+    `Email: ${s.email || 'Not set'}`,
+    `Balance: ${s.balance}`,
+    `Transactions: ${s.txCount}`,
+    `Score: ${s.score}`,
+    `Wallet type: ${s.walletType}`,
+    `First seen: ${s.firstSeen}`,
+    `Activity streak: ${s.streak}`,
+    `Diversity: ${s.diversity}`,
+    `Wallet badge: ${s.badge}`,
+    `Arcscan: ${CONFIG.explorerUrl}/address/${s.wallet && s.wallet.startsWith('0x') ? s.wallet : ''}`
+  ].join('
+');
 }
 
-els.profileForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const wallet = els.walletInput.value.trim();
-  const email = els.emailInput.value.trim();
-  analyzeProfile(wallet, email);
-});
+function bindEvents() {
+  els.profileForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    analyzeWallet(els.walletInput.value.trim(), els.emailInput.value.trim());
+  });
+  els.useDemoAddress.addEventListener('click', () => { els.walletInput.value = CONFIG.sampleAddress; updateJourneyAndIdentity(); showToast('Sample wallet loaded'); });
+  els.saveProfileBtn.addEventListener('click', saveProfile);
+  els.clearProfileBtn.addEventListener('click', clearProfile);
+  els.copyShareLink.addEventListener('click', () => copyText(buildShareUrl(), 'Share link copied'));
+  els.copySnapshot.addEventListener('click', () => copyText(buildSnapshotText(), 'Summary snapshot copied'));
+  els.copyWalletBtn.addEventListener('click', () => copyText(els.walletInput.value.trim(), 'Wallet copied'));
+  els.copyArcscanBtn.addEventListener('click', () => copyText(`${CONFIG.explorerUrl}/address/${els.walletInput.value.trim()}`, 'Arcscan link copied'));
+  els.copyEmailBtn.addEventListener('click', () => copyText(els.emailInput.value.trim(), 'Email copied'));
+  els.modalCopyEmail.addEventListener('click', () => copyText(els.emailInput.value.trim(), 'Email copied'));
+  els.modalCopySummary.addEventListener('click', () => copyText(buildSnapshotText(), 'Summary copied'));
+  els.openSignInModal.addEventListener('click', openModal);
+  els.openSignInModalHero.addEventListener('click', openModal);
+  els.openSignInFromIdentity.addEventListener('click', openModal);
+  els.closeSignInModal.addEventListener('click', closeModal);
+  els.signInModal.addEventListener('click', (e) => { if (e.target?.dataset?.closeModal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-els.walletInput.addEventListener('input', () => {
-  updateIdentity(els.walletInput.value.trim(), els.emailInput.value.trim());
-  persistProfile();
-  if (ethers.isAddress(els.walletInput.value.trim())) {
-    els.quickWalletLink.href = `${CONFIG.explorerUrl}/address/${els.walletInput.value.trim()}`;
+  document.addEventListener('click', (e) => {
+    const act = e.target.closest('[data-activity-filter]');
+    if (act) {
+      state.activityFilter = act.dataset.activityFilter;
+      renderActivityFilters();
+      renderActivities(els.activityNote.classList.contains('hidden') ? '' : els.activityNote.textContent);
+    }
+    const com = e.target.closest('[data-community-filter]');
+    if (com) {
+      state.communityFilter = com.dataset.communityFilter;
+      renderCommunityFilters();
+      renderCommunity();
+    }
+  });
+
+  [els.walletInput, els.emailInput].forEach(input => input.addEventListener('input', () => {
+    updateJourneyAndIdentity();
+    setBanner('', '');
+  }));
+}
+
+function init() {
+  renderActivityFilters();
+  renderCommunityFilters();
+  renderCommunity();
+  updateJourneyAndIdentity();
+  resetWalletViews();
+  setWalletInsightDefaults();
+  refreshNetworkPanel();
+  setInterval(refreshNetworkPanel, 30000);
+  bindEvents();
+
+  const params = new URLSearchParams(window.location.search);
+  const queryWallet = params.get('address') || '';
+  const queryEmail = params.get('email') || '';
+  let restored = false;
+  if (queryWallet || queryEmail) {
+    if (queryWallet) els.walletInput.value = queryWallet;
+    if (queryEmail) els.emailInput.value = queryEmail;
+    updateJourneyAndIdentity();
+    restored = true;
+    setBanner('info', 'Loaded profile values from the shared link.');
+  } else if (loadSavedProfile()) {
+    updateJourneyAndIdentity();
+    restored = true;
+    setBanner('info', 'Loaded your saved ArcLume profile mode from local storage.');
   }
-});
 
-els.emailInput.addEventListener('input', () => {
-  updateIdentity(els.walletInput.value.trim(), els.emailInput.value.trim());
-  persistProfile();
-});
-
-els.useDemoAddress.addEventListener('click', () => {
-  els.walletInput.value = CONFIG.sampleAddress;
-  analyzeProfile(CONFIG.sampleAddress, els.emailInput.value.trim());
-});
-
-els.copySnapshot.addEventListener('click', () => {
-  copyText(buildSnapshotText(), els.copySnapshot, 'Copied snapshot', 'Copy profile snapshot');
-});
-
-[els.openSignInModal, els.openSignInModalInline, els.openSignInModalHero].forEach((button) => {
-  if (button) button.addEventListener('click', openModal);
-});
-
-els.closeModalBtn.addEventListener('click', closeModal);
-
-els.signInModal.addEventListener('click', (event) => {
-  if (event.target.matches('[data-close-modal]')) closeModal();
-});
-
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && els.signInModal.classList.contains('is-open')) closeModal();
-});
-
-els.copyModalPrep.addEventListener('click', () => {
-  copyText(buildSnapshotText(), els.copyModalPrep, 'Copied prep', 'Copy prep summary');
-});
-
-const queryAddress = new URLSearchParams(window.location.search).get('address');
-if (queryAddress) els.walletInput.value = queryAddress;
-
-els.rpcEndpoint.textContent = CONFIG.rpcUrl;
-renderCommunity();
-loadSavedProfile();
-if (ethers.isAddress(els.walletInput.value.trim())) {
-  els.quickWalletLink.href = `${CONFIG.explorerUrl}/address/${els.walletInput.value.trim()}`;
+  if (restored) showToast('Profile restored');
+  if (queryWallet && ethers.isAddress(queryWallet)) analyzeWallet(queryWallet, queryEmail);
 }
-resetProfileUI(els.walletInput.value.trim(), els.emailInput.value.trim());
-refreshNetworkPanel();
-setInterval(refreshNetworkPanel, 30000);
 
-if (queryAddress && ethers.isAddress(queryAddress)) {
-  analyzeProfile(queryAddress, els.emailInput.value.trim());
-}
+init();
