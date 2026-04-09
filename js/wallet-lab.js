@@ -249,7 +249,7 @@ function bindEvents() {
   labEls.createWalletsBtn?.addEventListener('click', createWallets);
   labEls.loadBalancesBtn?.addEventListener('click', loadBalances);
   labEls.transferBtn?.addEventListener('click', transferUsdc);
-  labEls.copyFaucetWalletBtn?.addEventListener('click', () => copyText(labState.walletAId || labState.walletAAddress, 'Wallet A copied for Circle faucet use.'));
+  labEls.copyFaucetWalletBtn?.addEventListener('click', () => copyText(labState.walletAAddress || labState.walletAId, 'Wallet A address copied. Paste this into the Circle Faucet.'));
 }
 
 loadLabState();
