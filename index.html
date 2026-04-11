@@ -20,6 +20,9 @@
 </head>
 <body>
   <div class="grid-overlay" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-3" aria-hidden="true"></div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <main class="shell">
@@ -88,6 +91,17 @@
             </div>
             <div class="tag tag-primary">Live data</div>
           </div>
+
+          <!-- Wallet Connect -->
+          <button type="button" class="wallet-connect-btn" id="walletConnectBtn">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect x="2" y="5" width="16" height="11" rx="3" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M2 8h16" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="14" cy="12" r="1.5" fill="currentColor"/>
+            </svg>
+            <span id="walletConnectLabel">Connect wallet to auto-fill</span>
+          </button>
+          <div class="connect-divider">or enter manually</div>
 
           <form class="dual-form" id="profileForm">
             <label class="field-wrap">
@@ -259,7 +273,7 @@
 
 </div>
 
-      <aside class="stack">
+      <aside class="stack" style="display:contents;">
         <section class="card glass">
           <div class="card-header">
             <div>
@@ -475,22 +489,31 @@
         ArcLume prepares the wallet and email context, but personal Arc House points, badges, and event history still live behind the real Arc House sign-in flow.
       </p>
 
-      <div class="modal-grid">
-        <article class="modal-stat">
-          <span>Wallet</span>
+      <div class="modal-identity-grid">
+        <div class="modal-identity-row">
+          <span>Wallet address</span>
           <strong id="modalWalletValue">Not set</strong>
-          <small>Used for Arc network analysis inside ArcLume.</small>
-        </article>
-        <article class="modal-stat">
+        </div>
+        <div class="modal-identity-row">
           <span>Email</span>
           <strong id="modalEmailValue">Not set</strong>
-          <small>Optional identity prep for your Arc House session.</small>
-        </article>
-        <article class="modal-stat">
-          <span>Arc House private data</span>
+        </div>
+        <div class="modal-identity-row">
+          <span>Arc score</span>
+          <strong id="modalScoreValue">--</strong>
+        </div>
+        <div class="modal-identity-row">
+          <span>Tx count</span>
+          <strong id="modalTxCountValue">--</strong>
+        </div>
+        <div class="modal-identity-row">
+          <span>Wallet type</span>
+          <strong id="modalWalletTypeValue">--</strong>
+        </div>
+        <div class="modal-identity-row">
+          <span>Private data</span>
           <strong>Login required</strong>
-          <small>Points, badges, and personal contribution history.</small>
-        </article>
+        </div>
       </div>
 
       <div class="modal-actions">

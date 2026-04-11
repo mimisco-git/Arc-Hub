@@ -743,6 +743,10 @@ function buildSnapshotText() {
 }
 
 function bindEvents() {
+  // Wallet connect
+  const walletConnectBtn = document.getElementById('walletConnectBtn');
+  if (walletConnectBtn) walletConnectBtn.addEventListener('click', connectWalletMetaMask);
+
   els.profileForm.addEventListener('submit', (e) => {
     e.preventDefault();
     analyzeWallet(els.walletInput.value.trim(), els.emailInput.value.trim());
@@ -762,7 +766,19 @@ function bindEvents() {
   els.copyPlannerSummary.addEventListener('click', copyPlannerSummary);
   els.resetPlanner.addEventListener('click', resetPlanner);
   POINT_RULES.forEach(rule => els[rule.key]?.addEventListener('input', calculatePlanner));
-  els.openSignInModal.addEventListener('click', openModal);
+  els.openSignInModal.addEventListener('click', () => {
+    // Populate modal with current state data
+    if (document.getElementById('modalScoreValue')) {
+      document.getElementById('modalScoreValue').textContent = els.scoreValue?.textContent || '--';
+    }
+    if (document.getElementById('modalTxCountValue')) {
+      document.getElementById('modalTxCountValue').textContent = els.txCountValue?.textContent || '--';
+    }
+    if (document.getElementById('modalWalletTypeValue')) {
+      document.getElementById('modalWalletTypeValue').textContent = els.walletTypeValue?.textContent || '--';
+    }
+    openModal();
+  });
   els.openSignInModalHero.addEventListener('click', openModal);
   els.openSignInFromIdentity.addEventListener('click', openModal);
   els.closeSignInModal.addEventListener('click', closeModal);
