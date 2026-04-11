@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ArcLume | Arc Wallet Intelligence + Wallet Lab</title>
-  <meta name="description" content="ArcLume V8 adds an architect points planner, role eligibility estimator, connected-mode readiness, saved profiles, smarter wallet insights, and an auto-updating public Arc House feed powered by GitHub Actions." />
+  <meta name="description" content="ArcLume is a premium Arc wallet intelligence dashboard with live on-chain data, Circle Wallet Lab, Arc House companion tools, and architect planning features." />
   <meta name="theme-color" content="#07110d" />
   <meta property="og:title" content="ArcLume | Arc Wallet Intelligence" />
   <meta property="og:description" content="Premium Arc wallet and Arc House companion dashboard." />
@@ -30,24 +30,23 @@
         </div>
         <div class="brand-copy">
           <h1>ArcLume</h1>
-          <p>Wallet intelligence, Wallet Lab, Arc House handoff, saved profiles, and Circle backend integration on Arc testnet.</p>
+          <p>Arc wallet intelligence and Circle Wallet Lab on Arc Testnet.</p>
         </div>
       </div>
 
       <div class="top-actions">
         <div class="pill"><span class="dot"></span><span id="rpcStatusText">Arc network checking</span></div>
         <div class="pill">Chain ID <strong>5042002</strong></div>
-        <div class="pill">Theme <strong>Auto system</strong></div>
       </div>
     </section>
 
     <section class="hero glass">
       <div class="hero-grid">
         <div>
-          <div class="eyebrow"><span class="pulse"></span> Wallet signal, architect planning, connected-ready route</div>
-          <h2><span class="gradient-text">A clearer path,</span> from Arc wallet to Arc House.</h2>
+          <div class="eyebrow"><span class="pulse"></span> Live on Arc Testnet</div>
+          <h2><span class="gradient-text">Arc wallet intelligence,</span> built for builders.</h2>
           <p>
-            ArcLume V9 adds the Circle backend Wallet Lab: create developer-controlled wallets on Arc Testnet, fund them via the Circle faucet, and transfer test USDC between them in one guided flow.
+            Check any Arc wallet, plan your Architect points, explore the Arc House community board, and run real USDC transfers using the Circle Wallet Lab.
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#lookup">Start profile lookup</a>
@@ -66,10 +65,10 @@
           </div>
 
           <div class="mini-panel">
-            <div class="label">Data boundary</div>
-            <p>
-              ArcLume can show real Arc onchain data and public Arc House resources. Personal Arc House points, badges, and participation history still require Arc House sign-in.
-            </p>
+            <div class="label">Gas token</div>
+            <p style="font-size:1.5rem;font-weight:800;margin:6px 0 4px;color:var(--primary)">USDC</p>
+            <div class="meta-row"><span>Network</span><span>Arc Testnet</span></div>
+            <div class="meta-row"><span>Chain ID</span><span>5042002</span></div>
           </div>
         </div>
       </div>
@@ -87,7 +86,7 @@
                 Use your wallet address for Arc network intelligence and your email address to prepare a cleaner Arc House handoff. Save the profile locally, share a prefilled link, and resume where you left off.
               </p>
             </div>
-            <div class="tag tag-primary">V9 wallet lab</div>
+            <div class="tag tag-primary">Live data</div>
           </div>
 
           <form class="dual-form" id="profileForm">
@@ -111,9 +110,7 @@
             <button class="ghost-btn" id="copySnapshot" type="button">Copy summary snapshot</button>
           </div>
 
-          <div class="helper-note">
-            Email is saved locally in your browser when you choose save profile mode. ArcLume does not claim that email alone can reveal private Arc House stats.
-          </div>
+
 
           <div class="loading-bar" id="loadingBar"><span></span></div>
         </section>
@@ -381,63 +378,57 @@
 <section class="card glass">
   <div class="card-header">
     <div>
-      <h3>Connected mode readiness</h3>
-      <p>ArcLume stays fully working as a static site, but it is now prepared for a future supported authenticated connector when one exists.</p>
+      <h3>Quick links</h3>
+      <p>Jump to the most useful Arc resources and tools.</p>
     </div>
-    <div class="tag tag-accent" id="connectorModeTag">Static mode</div>
+    <div class="tag tag-accent">Arc ecosystem</div>
   </div>
-  <div class="status-list">
-    <div class="status-row"><span>Connector state</span><span id="connectorStatus">Not configured</span></div>
-    <div class="status-row"><span>Auth endpoint</span><span id="connectorAuthEndpoint">Not set</span></div>
-    <div class="status-row"><span>Profile endpoint</span><span id="connectorProfileEndpoint">Not set</span></div>
-    <div class="status-row"><span>Callback page</span><span><a class="text-link" href="./auth/callback.html">auth/callback.html</a></span></div>
-  </div>
-  <div class="helper-note top-gap">Use <code>runtime-config.js</code> and the example worker only when you have a supported Arc House auth or profile connector.</div>
   <div class="sub-actions top-gap">
-    <a class="ghost-btn" href="./connected-mode.html" id="openConnectedDocs">Connected mode docs</a>
-    <button class="ghost-btn" type="button" id="copyRuntimeConfigBtn">Copy runtime config</button>
+    <a class="ghost-btn" href="https://testnet.arcscan.app" target="_blank" rel="noreferrer">Arc Explorer</a>
+    <a class="ghost-btn" href="https://faucet.circle.com" target="_blank" rel="noreferrer">Circle Faucet</a>
+    <a class="ghost-btn" href="https://community.arc.network/home" target="_blank" rel="noreferrer">Arc House</a>
+    <a class="ghost-btn" href="./wallet-lab.html">Wallet Lab</a>
   </div>
 </section>
 
         <section class="card glass">
           <div class="card-header">
             <div>
-              <h3>Why this version is stronger</h3>
-              <p>V9 adds the Circle Wallet Lab: real developer-controlled wallet creation and USDC transfer on Arc Testnet.</p>
+              <h3>What ArcLume gives you</h3>
+              <p>Everything you need to understand your Arc wallet and plan your path through the Arc ecosystem.</p>
             </div>
           </div>
           <div class="insight-grid">
             <article class="insight">
-              <h4>Better trust</h4>
+              <h4>Wallet intelligence</h4>
               <ul>
-                <li>Clear error states</li>
-                <li>No fake fallback stats</li>
-                <li>Community source labels and refresh metadata</li>
-                <li>Auto-updating public feed architecture</li>
+                <li>Live Arc balance and tx count</li>
+                <li>Activity streak and diversity score</li>
+                <li>First seen date and warmth badge</li>
               </ul>
             </article>
             <article class="insight">
-              <h4>Better utility</h4>
+              <h4>Circle Wallet Lab</h4>
               <ul>
-                <li>Saved profiles and auto-load</li>
-                <li>Share links and quick copy actions</li>
-                <li>Cleaner sign-in handoff</li>
+                <li>Create developer-controlled wallets</li>
+                <li>Transfer test USDC on Arc Testnet</li>
+                <li>Verify on Arcscan</li>
               </ul>
             </article>
             <article class="insight">
-              <h4>Better insight</h4>
+              <h4>Arc House tools</h4>
               <ul>
-                <li>First seen date</li>
-                <li>Activity streak and diversity</li>
-                <li>Wallet warmth badge</li>
+                <li>Priority board with filters</li>
+                <li>Architect points planner</li>
+                <li>Public resource library</li>
               </ul>
             </article>
             <article class="insight">
-              <h4>Better planning</h4>
+              <h4>Profile features</h4>
               <ul>
-                <li>Priority board filters</li>
-                <li>Architect milestones</li>
-                <li>Contribution rule cues</li>
+                <li>Save and resume profiles</li>
+                <li>Share prefilled wallet links</li>
+                <li>Journey progress tracker</li>
               </ul>
             </article>
           </div>
@@ -446,8 +437,8 @@
     </section>
 
     <footer class="footer glass">
-      <span>ArcLume V9 - Arc Wallet Lab + wallet intelligence, Arc House companion, saved profiles, and Circle backend integration.</span>
-      <span>Live Arc Testnet checks, auto-updating public Arc House cards, architect planning, resource sync, and connected-mode readiness in one place.</span>
+      <span>ArcLume &middot; Arc wallet intelligence and Circle Wallet Lab on Arc Testnet.</span>
+      <span>Built on Arc &middot; Powered by Circle &middot; Live on-chain data</span>
     </footer>
   
     <section class="card glass">
@@ -458,7 +449,7 @@
             A smart but simple Arc contributor build for Circle backend flows on Arc Testnet. Create a wallet set, create wallet A and wallet B, fund wallet A, transfer test USDC, then inspect balances before and after.
           </p>
         </div>
-        <div class="tag tag-primary">V9 wallet lab</div>
+        <div class="tag tag-primary">Live data</div>
       </div>
 
       <div class="sub-actions">
@@ -467,9 +458,7 @@
         <a class="ghost-btn" href="https://developers.circle.com/wallets/dev-controlled/create-your-first-wallet" target="_blank" rel="noreferrer">Circle Arc quickstart</a>
       </div>
 
-      <div class="helper-note">
-        The ArcLume frontend is ready now. To make wallet creation and transfer live, deploy the separate backend scaffold in the <code>api</code> folder and point <code>runtime-config.js</code> at it.
-      </div>
+
     </section>
     
   </main>
@@ -506,11 +495,11 @@
         <a class="btn btn-primary" href="https://community.arc.network/home" target="_blank" rel="noreferrer">Open Arc House sign in</a>
         <button class="btn btn-secondary" type="button" id="modalCopyEmail">Copy email</button>
         <button class="btn btn-secondary" type="button" id="modalCopySummary">Copy profile summary</button>
-        <a class="btn btn-secondary" href="./connected-mode.html" id="modalOpenConnectedDocs">Connected mode docs</a>
+
       </div>
 
       <div class="helper-note top-gap">
-        Useful follow-ups after sign-in: check your My Contributions panel, compare your tier progress against the Architect docs, and use the contribution rules to plan your next points.
+        After signing in, check your contributions panel and compare your tier progress against the Architect docs.
       </div>
     </div>
   </div>
