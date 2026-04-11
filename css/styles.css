@@ -443,3 +443,16 @@ body::after {
   .journey-grid { grid-template-columns: 1fr; }
   .modal-grid { grid-template-columns: 1fr; }
 }
+
+
+/* Full width sections outside layout grid */
+.full-width-section {
+  width: 100%;
+  margin-top: 18px;
+}
+
+@media (max-width: 900px) {
+  .full-width-section[style*="grid-template-columns:repeat(2"] {
+    grid-template-columns: 1fr !important;
+  }
+}

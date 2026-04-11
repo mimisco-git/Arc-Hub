@@ -191,57 +191,7 @@
           </div>
         </section>
 
-        <section class="split-section" style="width:100%;">
-          <section class="card glass">
-            <div class="card-header">
-              <div>
-                <h3>Profile readiness and Arc House bridge</h3>
-                <p>Email makes ArcLume feel more personal, but Arc House still controls private account data. This section prepares the handoff and keeps profile fields honest.</p>
-              </div>
-              <div class="tag tag-warning">Trust first</div>
-            </div>
-
-            <div class="identity-list">
-              <div class="identity-row"><span>Wallet address</span><span id="identityWallet">Not checked yet</span></div>
-              <div class="identity-row"><span>Profile email</span><span id="identityEmail">Optional</span></div>
-              <div class="identity-row"><span>Arc House status</span><span id="identityStatus">Ready for wallet or sign-in</span></div>
-              <div class="identity-row"><span>Linked account proof</span><span id="identityProof">Not verified</span></div>
-              <div class="identity-row"><span>Points</span><span id="identityPoints">Login required</span></div>
-              <div class="identity-row"><span>Architect tier</span><span id="identityTier">Login required</span></div>
-              <div class="identity-row"><span>Badges</span><span id="identityBadges">Login required</span></div>
-              <div class="identity-row"><span>Events participated</span><span id="identityEvents">Login required</span></div>
-            </div>
-
-            <div class="mini-metrics top-gap">
-              <article class="mini-stat">
-                <span class="mini-stat-label">Readiness score</span>
-                <strong id="readinessScore">0%</strong>
-                <small>Wallet + email + saved profile completeness.</small>
-              </article>
-              <article class="mini-stat">
-                <span class="mini-stat-label">Community mode</span>
-                <strong id="communityModeValue">Awaiting input</strong>
-                <small>Profile preparation state for Arc House context.</small>
-              </article>
-            </div>
-
-            <div class="note top-gap" id="identityNote">
-              Add both wallet and email to unlock the fuller ArcLume profile mode. Personal Arc House stats still remain sign-in-only unless Arc provides an authenticated integration later.
-            </div>
-
-            <div class="action-panel top-gap">
-              <div class="action-panel-copy">
-                <h4>Most useful next action</h4>
-                <p id="nextActionText">Start with a wallet lookup, then add your email if you want ArcLume to prepare your Arc House handoff.</p>
-              </div>
-              <div class="action-panel-links">
-                <button class="btn btn-primary" type="button" id="openSignInFromIdentity">Continue to Arc House sign in</button>
-                <button class="btn btn-secondary" type="button" id="copyEmailBtn">Copy email for sign-in</button>
-              </div>
-            </div>
-          </section>
-
-          <section class="card glass">
+        <section class="card glass">
             <div class="card-header">
               <div>
                 <h3>Wallet-to-community journey</h3>
@@ -307,54 +257,7 @@
           <div id="resourceGrid" class="resource-grid"></div>
         </section>
 
-<section class="card glass planner-card-full">
-  <div class="card-header">
-    <div>
-      <h3>Architect points planner</h3>
-      <p>Use public Arc House contribution rules to estimate how many points your planned actions could generate, what tier that could reach, and which roles become realistic next.</p>
-    </div>
-    <div class="tag tag-success">Planner</div>
-  </div>
-
-  <div class="planner-layout">
-    <div class="planner-grid" id="plannerGrid">
-      <label class="planner-item"><span>Finish onboarding</span><input id="planOnboarding" type="number" min="0" value="1" /></label>
-      <label class="planner-item"><span>Daily active days</span><input id="planDailyActive" type="number" min="0" value="7" /></label>
-      <label class="planner-item"><span>Event registrations</span><input id="planEventRegistration" type="number" min="0" value="2" /></label>
-      <label class="planner-item"><span>Event participation</span><input id="planEventParticipation" type="number" min="0" value="1" /></label>
-      <label class="planner-item"><span>Read content</span><input id="planReadContent" type="number" min="0" value="5" /></label>
-      <label class="planner-item"><span>Watch videos</span><input id="planWatchVideo" type="number" min="0" value="2" /></label>
-      <label class="planner-item"><span>Publish posts</span><input id="planPublishPost" type="number" min="0" value="1" /></label>
-      <label class="planner-item"><span>Comments / replies</span><input id="planComments" type="number" min="0" value="2" /></label>
-      <label class="planner-item"><span>Accepted answers</span><input id="planAcceptedAnswer" type="number" min="0" value="0" /></label>
-      <label class="planner-item"><span>Author content</span><input id="planAuthor" type="number" min="0" value="0" /></label>
-      <label class="planner-item"><span>ID verified</span><input id="planIdVerified" type="number" min="0" value="1" max="1" /></label>
-      <label class="planner-item"><span>Developer challenge wins</span><input id="planDeveloperChallenge" type="number" min="0" value="0" /></label>
-      <label class="planner-item"><span>Hackathon wins</span><input id="planHackathonWinner" type="number" min="0" value="0" /></label>
-      <label class="planner-item"><span>Course champion</span><input id="planCourseChampion" type="number" min="0" value="0" /></label>
-      <label class="planner-item"><span>Event speaker</span><input id="planEventSpeaker" type="number" min="0" value="0" /></label>
-      <label class="planner-item"><span>Webinar or meeting host</span><input id="planMeetingHost" type="number" min="0" value="0" /></label>
-    </div>
-
-    <div class="planner-summary-card glass-subtle">
-      <div class="mini-metrics insights-grid-3">
-        <article class="mini-stat"><span class="mini-stat-label">Estimated points</span><strong id="plannerTotalPoints">--</strong><small>Public-rules estimate only.</small></article>
-        <article class="mini-stat"><span class="mini-stat-label">Estimated tier</span><strong id="plannerTier">Tier 0</strong><small>Based on public tier thresholds.</small></article>
-        <article class="mini-stat"><span class="mini-stat-label">Next milestone</span><strong id="plannerNextMilestone">500</strong><small>Points needed for the next tier.</small></article>
-        <article class="mini-stat"><span class="mini-stat-label">Likely role window</span><strong id="plannerRoles">None yet</strong><small>Based on public Architect role docs.</small></article>
-        <article class="mini-stat"><span class="mini-stat-label">Progress to next tier</span><strong id="plannerProgress">0%</strong><small>Planner-only estimate.</small></article>
-        <article class="mini-stat"><span class="mini-stat-label">Suggested focus</span><strong id="plannerFocus">Onboarding + events</strong><small>Most efficient next public actions.</small></article>
-      </div>
-      <div class="planner-breakdown top-gap" id="plannerBreakdown"></div>
-      <div class="sub-actions top-gap">
-        <button class="ghost-btn" type="button" id="copyPlannerSummary">Copy planner summary</button>
-        <button class="ghost-btn" type="button" id="resetPlanner">Reset planner</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-      </div>
+</div>
 
       <aside class="stack">
         <section class="card glass">
@@ -435,6 +338,105 @@
         </section>
       </aside>
     </section>
+
+    <!-- Full width: Profile readiness + Journey -->
+    <section class="full-width-section" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;">
+      <section class="card glass">
+            <div class="card-header">
+              <div>
+                <h3>Profile readiness and Arc House bridge</h3>
+                <p>Email makes ArcLume feel more personal, but Arc House still controls private account data. This section prepares the handoff and keeps profile fields honest.</p>
+              </div>
+              <div class="tag tag-warning">Trust first</div>
+            </div>
+
+            <div class="identity-list">
+              <div class="identity-row"><span>Wallet address</span><span id="identityWallet">Not checked yet</span></div>
+              <div class="identity-row"><span>Profile email</span><span id="identityEmail">Optional</span></div>
+              <div class="identity-row"><span>Arc House status</span><span id="identityStatus">Ready for wallet or sign-in</span></div>
+              <div class="identity-row"><span>Linked account proof</span><span id="identityProof">Not verified</span></div>
+              <div class="identity-row"><span>Points</span><span id="identityPoints">Login required</span></div>
+              <div class="identity-row"><span>Architect tier</span><span id="identityTier">Login required</span></div>
+              <div class="identity-row"><span>Badges</span><span id="identityBadges">Login required</span></div>
+              <div class="identity-row"><span>Events participated</span><span id="identityEvents">Login required</span></div>
+            </div>
+
+            <div class="mini-metrics top-gap">
+              <article class="mini-stat">
+                <span class="mini-stat-label">Readiness score</span>
+                <strong id="readinessScore">0%</strong>
+                <small>Wallet + email + saved profile completeness.</small>
+              </article>
+              <article class="mini-stat">
+                <span class="mini-stat-label">Community mode</span>
+                <strong id="communityModeValue">Awaiting input</strong>
+                <small>Profile preparation state for Arc House context.</small>
+              </article>
+            </div>
+
+            <div class="note top-gap" id="identityNote">
+              Add both wallet and email to unlock the fuller ArcLume profile mode. Personal Arc House stats still remain sign-in-only unless Arc provides an authenticated integration later.
+            </div>
+
+            <div class="action-panel top-gap">
+              <div class="action-panel-copy">
+                <h4>Most useful next action</h4>
+                <p id="nextActionText">Start with a wallet lookup, then add your email if you want ArcLume to prepare your Arc House handoff.</p>
+              </div>
+              <div class="action-panel-links">
+                <button class="btn btn-primary" type="button" id="openSignInFromIdentity">Continue to Arc House sign in</button>
+                <button class="btn btn-secondary" type="button" id="copyEmailBtn">Copy email for sign-in</button>
+              </div>
+            </div>
+    </section>
+
+    <!-- Full width: Architect points planner -->
+    <section class="card glass full-width-section">
+  <div class="card-header">
+    <div>
+      <h3>Architect points planner</h3>
+      <p>Use public Arc House contribution rules to estimate how many points your planned actions could generate, what tier that could reach, and which roles become realistic next.</p>
+    </div>
+    <div class="tag tag-success">Planner</div>
+  </div>
+
+  <div class="planner-layout">
+    <div class="planner-grid" id="plannerGrid">
+      <label class="planner-item"><span>Finish onboarding</span><input id="planOnboarding" type="number" min="0" value="1" /></label>
+      <label class="planner-item"><span>Daily active days</span><input id="planDailyActive" type="number" min="0" value="7" /></label>
+      <label class="planner-item"><span>Event registrations</span><input id="planEventRegistration" type="number" min="0" value="2" /></label>
+      <label class="planner-item"><span>Event participation</span><input id="planEventParticipation" type="number" min="0" value="1" /></label>
+      <label class="planner-item"><span>Read content</span><input id="planReadContent" type="number" min="0" value="5" /></label>
+      <label class="planner-item"><span>Watch videos</span><input id="planWatchVideo" type="number" min="0" value="2" /></label>
+      <label class="planner-item"><span>Publish posts</span><input id="planPublishPost" type="number" min="0" value="1" /></label>
+      <label class="planner-item"><span>Comments / replies</span><input id="planComments" type="number" min="0" value="2" /></label>
+      <label class="planner-item"><span>Accepted answers</span><input id="planAcceptedAnswer" type="number" min="0" value="0" /></label>
+      <label class="planner-item"><span>Author content</span><input id="planAuthor" type="number" min="0" value="0" /></label>
+      <label class="planner-item"><span>ID verified</span><input id="planIdVerified" type="number" min="0" value="1" max="1" /></label>
+      <label class="planner-item"><span>Developer challenge wins</span><input id="planDeveloperChallenge" type="number" min="0" value="0" /></label>
+      <label class="planner-item"><span>Hackathon wins</span><input id="planHackathonWinner" type="number" min="0" value="0" /></label>
+      <label class="planner-item"><span>Course champion</span><input id="planCourseChampion" type="number" min="0" value="0" /></label>
+      <label class="planner-item"><span>Event speaker</span><input id="planEventSpeaker" type="number" min="0" value="0" /></label>
+      <label class="planner-item"><span>Webinar or meeting host</span><input id="planMeetingHost" type="number" min="0" value="0" /></label>
+    </div>
+
+    <div class="planner-summary-card glass-subtle">
+      <div class="mini-metrics insights-grid-3">
+        <article class="mini-stat"><span class="mini-stat-label">Estimated points</span><strong id="plannerTotalPoints">--</strong><small>Public-rules estimate only.</small></article>
+        <article class="mini-stat"><span class="mini-stat-label">Estimated tier</span><strong id="plannerTier">Tier 0</strong><small>Based on public tier thresholds.</small></article>
+        <article class="mini-stat"><span class="mini-stat-label">Next milestone</span><strong id="plannerNextMilestone">500</strong><small>Points needed for the next tier.</small></article>
+        <article class="mini-stat"><span class="mini-stat-label">Likely role window</span><strong id="plannerRoles">None yet</strong><small>Based on public Architect role docs.</small></article>
+        <article class="mini-stat"><span class="mini-stat-label">Progress to next tier</span><strong id="plannerProgress">0%</strong><small>Planner-only estimate.</small></article>
+        <article class="mini-stat"><span class="mini-stat-label">Suggested focus</span><strong id="plannerFocus">Onboarding + events</strong><small>Most efficient next public actions.</small></article>
+      </div>
+      <div class="planner-breakdown top-gap" id="plannerBreakdown"></div>
+      <div class="sub-actions top-gap">
+        <button class="ghost-btn" type="button" id="copyPlannerSummary">Copy planner summary</button>
+        <button class="ghost-btn" type="button" id="resetPlanner">Reset planner</button>
+      </div>
+    </div>
+  </div>
+</section>
 
     <footer class="footer glass">
       <span>ArcLume &middot; Arc wallet intelligence and Circle Wallet Lab on Arc Testnet.</span>
