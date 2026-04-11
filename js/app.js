@@ -742,14 +742,78 @@ function buildSnapshotText() {
   ].join('\n');
 }
 
+
+// ── Wallet Connect ──────────────────────────────────────────────────────────
+async function connectWalletMetaMask() {
+  const btn = document.getElementById('walletConnectBtn');
+  const label = document.getElementById('walletConnectLabel');
+  if (!btn || !label) return;
+
+  const win = window;
+  if (!win.ethereum) {
+    showToast('No wallet found. Install MetaMask or Rabby first.');
+    return;
+  }
+
+  label.textContent = 'Connecting...';
+  btn.disabled = true;
+
+  try {
+    const accounts = await win.ethereum.request({ method: 'eth_requestAccounts' });
+    if (!accounts || !accounts[0]) throw new Error('No account returned');
+    const address = accounts[0];
+
+    // Try switch to Arc testnet, add if not present
+    try {
+      await win.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: '0x4CE612' }],
+      });
+    } catch {
+      try {
+        await win.ethereum.request({
+          method: 'wallet_addEthereumChain',
+          params: [{
+            chainId: '0x4CE612',
+            chainName: 'Arc Testnet',
+            nativeCurrency: { name: 'USDC', symbol: 'USDC', decimals: 6 },
+            rpcUrls: ['https://rpc.testnet.arc.network'],
+            blockExplorerUrls: ['https://testnet.arcscan.app'],
+          }],
+        });
+      } catch { /* user rejected add */ }
+    }
+
+    // Fill wallet input and run analysis
+    if (els.walletInput) els.walletInput.value = address;
+    state.wallet = address;
+    btn.classList.add('connected');
+    label.textContent = address.slice(0, 8) + '...' + address.slice(-4);
+    showToast('Wallet connected. Running analysis...');
+    await analyzeWallet(address, els.emailInput?.value?.trim() || '');
+
+  } catch (err) {
+    label.textContent = 'Connect wallet to auto-fill';
+    showToast(err.message || 'Connection failed.');
+  } finally {
+    btn.disabled = false;
+  }
+}
+
 function bindEvents() {
   // Wallet connect
   const walletConnectBtn = document.getElementById('walletConnectBtn');
   if (walletConnectBtn) walletConnectBtn.addEventListener('click', connectWalletMetaMask);
 
-  els.profileForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+  // Use button click instead of form submit to prevent page reload
+  els.analyzeBtn.addEventListener('click', () => {
     analyzeWallet(els.walletInput.value.trim(), els.emailInput.value.trim());
+  });
+  // Also allow Enter key in inputs
+  [els.walletInput, els.emailInput].forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') analyzeWallet(els.walletInput.value.trim(), els.emailInput.value.trim());
+    });
   });
   els.useDemoAddress.addEventListener('click', () => { els.walletInput.value = CONFIG.sampleAddress; updateJourneyAndIdentity(); showToast('Sample wallet loaded'); });
   els.saveProfileBtn.addEventListener('click', saveProfile);
